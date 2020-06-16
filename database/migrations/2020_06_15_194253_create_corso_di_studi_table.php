@@ -31,6 +31,11 @@ class CreateCorsoDiStudiTable extends Migration
             $table->string('nome'); 
 
             /**
+             * Classe del corso di studi
+             */
+            $table->string('classe'); 
+
+            /**
              * Anno accademico di inserimento
              */
             $table->string('anno_accademico');  

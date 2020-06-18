@@ -28,4 +28,25 @@ class CorsoDiStudi extends Model
      * @var bool
      */
     public $timestamps = false; 
+
+    /**
+     * Ritorna il dipartimento a cui il cds è associato
+     *
+     * @return Relation
+     */
+    public function dipartimento(): Relation
+    {
+        return $this->belongsTo('App\Models\Dipartimento', 'id_dipartimento');
+    }
+    
+    /**
+     * Ritorna tutti gli insegnamenti associati al cds
+     *
+     * @return Relation
+     */
+    public function insegnamenti(): Relation
+    {
+        return $this->hasMany('App\Models\Insegnamento', 'id_cds');
+    }
+
 }

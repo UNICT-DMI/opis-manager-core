@@ -32,4 +32,14 @@ class SchedeOpis extends Model
      * @var bool
      */
     public $timestamps = false;
+    
+    /**
+     * Ritorna l'insegnamento a cui le schede opis sono associate
+     *
+     * @return void
+     */
+    public function insegnamento()
+    {
+        return $this->belongsTo('App\Models\Insegnamento', 'id_insegnamento');
+    }
 }

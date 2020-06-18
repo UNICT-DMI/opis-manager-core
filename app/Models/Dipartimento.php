@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\Relation;
 
 class Dipartimento extends Model
@@ -27,4 +28,15 @@ class Dipartimento extends Model
      * @var bool
      */
     public $timestamps = false; 
+    
+    /**
+     * Ritorna tutti i corsi di studi associati al dipartimento
+     *
+     * @return Relation
+     */
+    public function corsiDiStudi(): Relation
+    {
+        return $this->hasMany('App\Models\CorsoDiStudi', 'id_dipartimento');
+    }
+    
 }

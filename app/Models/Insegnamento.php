@@ -31,4 +31,24 @@ class Insegnamento extends Model
      * @var bool
      */
     public $timestamps = false;
+    
+    /**
+     * Ritorna il cds a cui l'insegnamento è associato
+     *
+     * @return Relation
+     */
+    public function corsoDiStudi(): Relation 
+    {
+        return $this->belongsTo('App\Models\CorsoDiStudi', 'id_cds');
+    }
+    
+    /**
+     * Ritorna tutte le schede opis associate al cds
+     *
+     * @return Relation
+     */
+    public function schedeOpis(): Relation
+    {
+        return $this->hasMany('App\Models\SchedeOpis', 'id_insegnamento');
+    }
 }

@@ -39,13 +39,13 @@ class CreateSchedeOpisTable extends Migration
              * numero totale di studenti di sesso femminile 
              * e frequentanti che hanno compilato la scheda
              */
-            $table->integer('femmine', false); 
+            $table->integer('femmine', false)->nullable(); 
 
             /**
              * numero totale di studenti di sesso femminile 
              * e non frequentanti che hanno compilato la scheda
              */
-            $table->integer('femmine_nf', false); 
+            $table->integer('femmine_nf', false)->nullable();
 
             /**
              * numero di studenti F.C. che hanno compilato 
@@ -66,14 +66,18 @@ class CreateSchedeOpisTable extends Migration
             $table->integer('inatt_nf', false); 
 
             /**
+             * parametri statistici vari nullable
+             */
+            $table->json('eta')->nullable();
+            $table->json('anno_iscr')->nullable();
+            $table->json('num_studenti')->nullable();
+            $table->json('ragg_uni')->nullable();
+            $table->json('studio_gg')->nullable();
+            $table->json('studio_tot')->nullable();
+
+            /**
              * parametri statistici vari
              */
-            $table->json('eta'); 
-            $table->json('anno_iscr'); 
-            $table->json('num_studenti'); 
-            $table->json('ragg_uni'); 
-            $table->json('studio_gg');
-            $table->json('studio_tot'); 
             $table->json('domande'); 
             $table->json('domande_nf'); 
             $table->json('motivo_nf'); 

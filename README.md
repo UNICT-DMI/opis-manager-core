@@ -6,7 +6,7 @@
 
 ## Opis-manager-core 📊 
 
-![CICD](https://github.com/UNICT-DMI/opis-manager-core/workflows/Laravel/badge.svg) Backend service for opis-manager project.
+![CICD](https://github.com/UNICT-DMI/opis-manager-core/workflows/project%20build/badge.svg) Backend service for opis-manager project.
 
 
 

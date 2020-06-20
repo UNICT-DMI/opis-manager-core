@@ -1,4 +1,4 @@
-![image-20200620081023749](/home/charlemagne/.config/Typora/typora-user-images/image-20200620081023749.png)
+![image-20200620081023749](./docs/images/opis-manager-logo.png)
 
 
 

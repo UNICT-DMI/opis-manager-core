@@ -34,11 +34,6 @@ class CreateInsegnamentoTable extends Migration
              * Anno accademico di inserimento
              */
             $table->string('anno_accademico');  
-
-            /**
-             * campo di ricerca 
-             */
-            $table->string('ssd');
             
             /**
              * Anno a partire dal quale si ha accesso all'insegnamento
@@ -85,6 +80,13 @@ class CreateInsegnamentoTable extends Migration
                 ->nullable()
                 ->default(NULL); 
             
+            /**
+             * campo di ricerca 
+             */
+            $table->string('ssd')
+                ->nullable()
+                ->default(NULL); 
+
             /**
              * ??
              */

@@ -23,9 +23,18 @@ Route::group(['prefix' => 'v2'], function() {
     Route::get('dipartimento', 'DipartimentoController@index')
         ->name('dipartimento.index'); 
 
-    Route::get('dipartimento/{dipartimento}/cds', 'DipartimentoController@corsiDiStudi')
+    Route::get('dipartimento/{unictId}/cds', 'DipartimentoController@corsiDiStudi')
         ->name('dipartimento.corsi_di_studi'); 
+
+    Route::get('dipartimento/with-id/{dipartimento}/cds', 'DipartimentoController@corsiDiStudiWithID')
+        ->name('dipartimento.corsi_di_studi.withid'); 
 
     Route::get('cds', 'CorsoDiStudiController@index')
         ->name('cds.index');    
+
+    Route::get('cds/{unictId}/insegnamenti', 'CorsoDiStudiController@insegnamenti')
+        ->name('cds.insegnamenti');  
+
+    Route::get('cds/with-id/{cds}/insegnamenti', 'CorsoDiStudiController@insegnamentiWithID')
+        ->name('cds.insegnamenti.withid');
 }); 

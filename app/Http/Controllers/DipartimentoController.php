@@ -37,8 +37,20 @@ class DipartimentoController extends Controller
     {
         $dip = Dipartimento::opisFindOrFail($unictId, $request->anno_accademico); 
 
-        return response()->json($dip->corsiDiStudi, Response::HTTP_OK); 
+        return response()->json($dip->corsiDiStudi); 
     }
 
-
+    /**
+     * Ritorna la lista di corsi di studi associati al dipartimento
+     * referenziato dall'unict id e dall'anno accademico passato come
+     * parametro. 
+     *
+     * @param  Dipartimento $dipartimento
+     * @return Response
+     */
+    public function corsiDiStudiWithID (Dipartimento $dipartimento): Response
+    {
+        return response()->json($dipartimento->corsiDiStudi); 
+    }
+    
 }

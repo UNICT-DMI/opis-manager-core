@@ -3,11 +3,14 @@
 namespace App\Models;
 
 use App\Models\Dipartimento;
+use App\Traits\OpisModelFinder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\Relation;
 
 class CorsoDiStudi extends Model
 {
+    use OpisModelFinder;
+
     /**
      * Campi assegnati massivamente 
      * 

@@ -79,7 +79,7 @@ class CorsoDiStudiTest extends TestCase
     }
 
     /** @test */
-    public function insegnamenti_elements_are_instance_of_instagnamento(): void 
+    public function insegnamenti_elements_are_instance_of_insegnamento(): void 
     {
         $this->seed(\DipartimentoTableSeeder::class);
         $this->seed(\CorsoDiStudiTableSeeder::class);

@@ -42,8 +42,8 @@ class DipartimentoController extends Controller
 
     /**
      * Ritorna la lista di corsi di studi associati al dipartimento
-     * referenziato dall'unict id e dall'anno accademico passato come
-     * parametro. 
+     * referenziato attraverso l'id del modello, che tramite i meccanismi
+     * di type hinting e D.I. viene convertito in una istanza di Dipartimento.  
      *
      * @param  Dipartimento $dipartimento
      * @return Response

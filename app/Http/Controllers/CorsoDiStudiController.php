@@ -40,10 +40,10 @@ class CorsoDiStudiController extends Controller
     }
 
     /**
-     * Ritorna la lista degli insegnamenti relativa al corso
-     * di studi identificato dall'unict-id e dall'anno 
-     * accademico passato come parametro.      
-     * 
+     * Ritorna la lista di insegnamenti associati al corso di studi
+     * referenziato attraverso l'id del modello, che tramite i meccanismi
+     * di type hinting e D.I. viene convertito in una istanza di Dipartimento. 
+     *      
      * @param  CorsoDiStudi $cds
      * @return Response
      */

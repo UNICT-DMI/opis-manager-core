@@ -37,4 +37,20 @@ class DipartimentoControllerTest extends TestCase
         $response->assertStatus(200);
     }
 
+    /** @test */
+    public function corrispondence_between_api_and_database_is_verified(): void 
+    {
+        $this->seed(\DipartimentoTableSeeder::class);
+        $this->seed(\CorsoDiStudiTableSeeder::class); 
+
+        $dipartimento = Dipartimento::first(); 
+
+        $response = $this->json(
+            'GET',  
+            '/api/v2/dipartimento/' . $dipartimento->unict_id . '/cds', 
+            ['anno_accademico' => '2017/2018']
+        );
+
+        $response = $this->assertJson($dipartimento->corsiDiStudi); 
+    }
 }

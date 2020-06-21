@@ -2,12 +2,15 @@
 
 namespace App\Models;
 
+use App\Traits\OpisModelFinder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\Relation;
 
 class Dipartimento extends Model
 {
+    use OpisModelFinder; 
+
     /**
      * Campi assegnati massivamente 
      * 
@@ -28,7 +31,7 @@ class Dipartimento extends Model
      * @var bool
      */
     public $timestamps = false; 
-    
+        
     /**
      * Ritorna tutti i corsi di studi associati al dipartimento
      *

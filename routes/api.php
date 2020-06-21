@@ -17,3 +17,13 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::group(['prefix' => 'v2'], function() {
+
+    Route::get('dipartimento', 'DipartimentoController@index')
+        ->name('dipartimento.index'); 
+
+    Route::get('dipartimento/{dipartimento}/cds', 'DipartimentoController@corsiDiStudi')
+        ->name('dipartimento.corsi_di_studi'); 
+
+}); 

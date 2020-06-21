@@ -26,4 +26,6 @@ Route::group(['prefix' => 'v2'], function() {
     Route::get('dipartimento/{dipartimento}/cds', 'DipartimentoController@corsiDiStudi')
         ->name('dipartimento.corsi_di_studi'); 
 
+    Route::get('cds', 'CorsoDiStudiController@index')
+        ->name('cds.index');    
 }); 

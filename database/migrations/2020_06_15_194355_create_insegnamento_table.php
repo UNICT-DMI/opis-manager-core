@@ -4,6 +4,12 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
+/**
+ * Nota: è importante che tutti i valori non definiti
+ * assumano il valore NULL e non stringhe vuote, 'no', 
+ * 0 etc... per consistenza della base di dati e della 
+ * trattazione dei dati nel backend. 
+ */
 class CreateInsegnamentoTable extends Migration
 {
     /**

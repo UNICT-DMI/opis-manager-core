@@ -30,6 +30,7 @@ class DipartimentoControllerTest extends TestCase
         $response = $this->json('GET',  '/api/v2/dipartimento', ['anno_accademico' => '2017/2018']);
 
         $response->assertStatus(200);
+        $response->assertJson(Dipartimento::where('anno_accademico', '2017/2018')->get()->toArray()); 
     }
 
     /** @test */

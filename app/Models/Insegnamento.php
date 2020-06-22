@@ -15,7 +15,8 @@ class Insegnamento extends Model
     protected $fillable = [
         'codice_gomp', 'nome', 'anno_accademico', 
         'ssd', 'anno', 'semestre', 'cfu', 'docente',
-        'canale', 'modulo', 'tipo', 'assegn', 'id_cds'
+        'canale', 'id_modulo', 'nome_modulo', 'tipo', 
+        'assegn', 'id_cds'
     ]; 
 
     /**
@@ -31,7 +32,7 @@ class Insegnamento extends Model
      * @var bool
      */
     public $timestamps = false;
-    
+
     /**
      * Ritorna il cds a cui l'insegnamento è associato
      *

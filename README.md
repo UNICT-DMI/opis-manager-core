@@ -6,9 +6,11 @@
 
 ## Opis-manager-core 📊 
 
-![CICD](https://github.com/UNICT-DMI/opis-manager-core/workflows/project%20build/badge.svg) Backend service for opis-manager project.
+![CICD](https://github.com/UNICT-DMI/opis-manager-core/workflows/project%20build/badge.svg) 
 
 
+
+Backend service for opis-manager project. Take a look at our [postman API documentation](https://explore.postman.com/templates/9736/opis-manager-core)!
 
 ### Getting started
 

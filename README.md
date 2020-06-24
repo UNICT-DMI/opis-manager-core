@@ -54,7 +54,13 @@ Install project dependencies
 $ composer install
 ```
 
-Se an application encryption key
+Set an application encryption key
+
+```sh
+$ php artisan key:generate
+```
+
+Generate a JWT secret
 
 ```sh
 $ php artisan key:generate

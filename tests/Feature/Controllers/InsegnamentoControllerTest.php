@@ -75,5 +75,18 @@ class InsegnamentoControllerTest extends TestCase
     }
 
     /** @test */
-    // public function can_display_insegnamento_schede_opis_with_id(): void {}
+    public function can_display_insegnamento_schede_opis_with_id(): void 
+    {
+        $this->seed(\DipartimentoTableSeeder::class); 
+        $this->seed(\CorsoDiStudiTableSeeder::class); 
+        $this->seed(\SchedeOpisTableSeeder::class); 
+
+        $schedeOpis = SchedeOpis::first(); 
+        $insegnamento = $schedeOpis->insegnamento; 
+        
+        $response = $this->json('GET', 'api/v2/insegnamento/with-id/'. $insegnamento->id .'/schedeopis');
+
+        $response->assertStatus(200); 
+        $response->assertJson($insegnamento->schedeOpis->toArray()); 
+    }
 }

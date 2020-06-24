@@ -44,4 +44,7 @@ Route::group(['prefix' => 'v2'], function() {
     Route::get('insegnamento/{codiceGomp}/schedeopis', 'InsegnamentoController@schedeOpis')
         ->name('insegnamento.schedeopis'); 
 
+    Route::get('insegnamento/with-id/{insegnamento}/schedeopis', 'InsegnamentoController@schedeOpisWithID')
+        ->name('insegnamento.schedeopis.withid'); 
+
 }); 

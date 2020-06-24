@@ -49,4 +49,17 @@ class InsegnamentoController extends Controller
 
         return response()->json($insegnamenti->with('schedeOpis')->get()); 
     }
+
+    /**
+     * Ritorna la lista di schede opis associate all'insegnamento
+     * referenziato attraverso l'id del modello, che tramite i meccanismi
+     * di type hinting e D.I. viene convertito in una istanza di Insegnamento. 
+     *
+     * @param  Insegnamento $insegnamento
+     * @return Response
+     */
+    public function schedeOpisWithID(Insegnamento $insegnamento): Response 
+    {
+        return response()->json($insegnamento->schedeOpis); 
+    }
 }

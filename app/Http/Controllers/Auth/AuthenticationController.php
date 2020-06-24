@@ -49,7 +49,8 @@ class AuthenticationController extends Controller
     }
 
     /** 
-     * Refresh a token.
+     * Torna un token rinfrescato (expires_time resettato) 
+     * ed invalida il precedente
      *
      * @return Response
      */
@@ -59,7 +60,7 @@ class AuthenticationController extends Controller
     }
 
    /**
-    * Log the user out (invalidate the token)
+    * Invalida il token jwt
     *
     * @return Response
     */
@@ -69,6 +70,16 @@ class AuthenticationController extends Controller
 
        return response()->json([], Response::HTTP_OK); 
    }
+
+   /**
+    * Ritorna le informazioni relative all'utente autenticato
+    *
+    * @return Response 
+    */
+    public function user(): Response
+    {
+        return response()->json(auth()->user()); 
+    }
 
     /**
      * Get the token array structure.

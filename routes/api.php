@@ -32,6 +32,8 @@ Route::group(['prefix' => 'auth'], function() {
     Route::post('refresh', 'Auth\AuthenticationController@refresh')
         ->name('auth.refresh'); 
 
+    Route::get('me', 'Auth\AuthenticationController@user')
+        ->name('auth.me'); 
 }); 
 
 Route::group(['prefix' => 'v2'], function() {

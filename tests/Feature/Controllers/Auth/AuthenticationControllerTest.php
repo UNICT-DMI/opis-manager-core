@@ -59,7 +59,7 @@ class AuthenticationControllerTest extends TestCase
     }
 
     /** @test */
-    public function user_can_retrieve_jwt_with_credentials() 
+    public function user_can_retrieve_jwt_with_credentials(): void
     {
         $user = factory(User::class)->create(); 
 
@@ -73,7 +73,7 @@ class AuthenticationControllerTest extends TestCase
     }
 
     /** @test */
-    public function user_cannot_retrieve_jwt_with_invalid_credentials() 
+    public function user_cannot_retrieve_jwt_with_invalid_credentials(): void
     {
         $user = factory(User::class)->create(); 
 
@@ -86,7 +86,7 @@ class AuthenticationControllerTest extends TestCase
     }
 
     /** @test */
-    public function user_can_refresh_token() 
+    public function user_can_refresh_token(): void
     {
         $user = factory(User::class)->create(); 
 
@@ -99,7 +99,7 @@ class AuthenticationControllerTest extends TestCase
     }
 
     /** @test */
-    public function token_is_invalidated_after_refresh() 
+    public function token_is_invalidated_after_refresh(): void
     {
         $user = factory(User::class)->create(); 
 
@@ -111,7 +111,7 @@ class AuthenticationControllerTest extends TestCase
     }
 
     /** @test */
-    public function user_can_logout()
+    public function user_can_logout(): void
     {
         $user = factory(User::class)->create(); 
 
@@ -123,7 +123,7 @@ class AuthenticationControllerTest extends TestCase
     }
 
     /** @test */
-    public function token_is_invalidated_after_logout()
+    public function token_is_invalidated_after_logout(): void
     {
         $user = factory(User::class)->create(); 
 
@@ -132,5 +132,19 @@ class AuthenticationControllerTest extends TestCase
         $response = $this->call('POST', '/api/auth/logout', ['token' => $token]);
 
         $this->assertFalse(JWTAuth::check($token));
+    }
+
+    /** @test */
+    public function authenticated_user_can_retrieve_its_informations(): void
+    {
+        $user = factory(User::class)->create();
+
+        $token = auth()->login($user); 
+
+        $response = $this->withHeaders(['Authorization' => 'Bearer ' . $token,])
+            ->json('GET', '/api/auth/me');
+
+        $response->assertStatus(200)
+            ->assertJson($user->toArray()); 
     }
 }

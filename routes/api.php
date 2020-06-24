@@ -18,6 +18,13 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::group(['prefix' => 'auth'], function() {
+
+    Route::post('signup', 'Auth\AuthenticationController@signup')
+        ->name('auth.signup'); 
+
+}); 
+
 Route::group(['prefix' => 'v2'], function() {
 
     Route::get('dipartimento', 'DipartimentoController@index')

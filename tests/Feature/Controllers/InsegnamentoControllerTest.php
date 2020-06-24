@@ -67,7 +67,12 @@ class InsegnamentoControllerTest extends TestCase
     }
 
     /** @test */
-    // public function cannot_display_insegnamento_schede_opis_without_valid_parameters(): void {}
+    public function cannot_display_insegnamento_schede_opis_without_valid_parameters(): void 
+    {
+        $response = $this->json('GET', 'api/v2/insegnamento/1/schedeopis');
+
+        $response->assertStatus(422);  
+    }
 
     /** @test */
     // public function can_display_insegnamento_schede_opis_with_id(): void {}

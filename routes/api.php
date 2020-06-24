@@ -23,6 +23,15 @@ Route::group(['prefix' => 'auth'], function() {
     Route::post('signup', 'Auth\AuthenticationController@signup')
         ->name('auth.signup'); 
 
+    Route::post('login', 'Auth\AuthenticationController@login')
+        ->name('auth.login'); 
+
+    Route::post('logout', 'Auth\AuthenticationController@logout')
+        ->name('auth.logout'); 
+    
+    Route::post('refresh', 'Auth\AuthenticationController@refresh')
+        ->name('auth.refresh'); 
+
 }); 
 
 Route::group(['prefix' => 'v2'], function() {

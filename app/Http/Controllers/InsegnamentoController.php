@@ -39,12 +39,14 @@ class InsegnamentoController extends Controller
     public function schedeOpis(int $codiceGomp, InsegnamentoRequest $request): Response 
     {
         $insegnamenti = Insegnamento::where('codice_gomp', $codiceGomp)
-            ->where('anno_accademico', $request->anno_accademico)
-            ->where('id_modulo', $request->id_modulo ?? null)
-            ->where('canale', $request->canale ?? null)
-            ->with('schedeOpis')
-            ->get(); 
+            ->where('anno_accademico', $request->anno_accademico); 
 
-        return response()->json($insegnamenti); 
+        if ($request->has('id_modulo'))
+            $insegnamenti->where('id_modulo', $request->id_modulo); 
+
+        if ($request->has('canale'))
+            $insegnamenti->where('id_modulo', $request->canale); 
+
+        return response()->json($insegnamenti->with('schedeOpis')->get()); 
     }
 }

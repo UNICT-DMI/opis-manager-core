@@ -3,6 +3,7 @@
 namespace Tests\Feature\Controllers;
 
 use Tests\TestCase;
+use App\Models\SchedeOpis;
 use App\Models\Insegnamento;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -37,14 +38,16 @@ class InsegnamentoControllerTest extends TestCase
         $this->seed(\DipartimentoTableSeeder::class); 
         $this->seed(\CorsoDiStudiTableSeeder::class); 
         $this->seed(\SchedeOpisTableSeeder::class); 
-        $insegnamento = Insegnamento::first(); 
+
+        $schedeOpis = SchedeOpis::first(); 
+        $insegnamento = $schedeOpis->insegnamento; 
 
         $query = ['anno_accademico' => '2017/2018'];
-        if ($insegnamento->id_modulo !== null)
-            array_push($query, ['id_modulo' => $insegnamento->id_modulo]); 
+        if ($insegnamento->id_modulo !== null)            
+            array_merge($query, ['id_modulo' => $insegnamento->id_modulo]); 
         if ($insegnamento->canale !== null) 
-            array_push($query, ['canale' => $insegnamento->canale]); 
-            
+            array_merge($query, ['canale' => $insegnamento->canale]); 
+
         $response = $this->json(
             'GET',
             'api/v2/insegnamento/'. $insegnamento->codice_gomp . '/schedeopis', 
@@ -57,9 +60,10 @@ class InsegnamentoControllerTest extends TestCase
             ->where('canale', $insegnamento->canale)
             ->with('schedeOpis')
             ->get()
-            ->toArray();  
+            ->toArray();
 
         $response->assertStatus(200); 
+        $response->assertJson($jsonResponse); 
     }
 
     /** @test */

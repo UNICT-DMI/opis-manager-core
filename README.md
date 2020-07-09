@@ -66,6 +66,18 @@ Generate a JWT secret
 $ php artisan key:generate
 ```
 
+Migrate the database schema
+
+```bash
+$ php artisan migrate
+```
+
+You can actually use seeders to fill the database with existing data. 
+
+```bash
+$ php artisan db:seed
+```
+
 Start a local web server: 
 
 ```sh

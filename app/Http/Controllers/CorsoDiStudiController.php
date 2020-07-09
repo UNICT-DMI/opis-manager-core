@@ -24,6 +24,17 @@ class CorsoDiStudiController extends Controller
     }
     
     /**
+     * Ritorna la lista completa dei corsi di studi salvati 
+     * nella base di dati. 
+     * 
+     * @return Response
+     */
+    public function all (): Response
+    {
+        return response()->json(CorsoDiStudi::all()); 
+    }
+
+    /**
      * Ritorna la lista degli insegnamenti relativa al corso
      * di studi identificato dall'unict-id e dall'anno 
      * accademico passato come parametro.      

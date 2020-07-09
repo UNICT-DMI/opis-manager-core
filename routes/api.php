@@ -53,6 +53,9 @@ Route::group(['prefix' => 'v2'], function() {
     Route::get('cds', 'CorsoDiStudiController@index')
         ->name('cds.index');    
 
+    Route::get('cds/all', 'CorsoDiStudiController@all')
+        ->name('cds.all'); 
+
     Route::get('cds/{unictId}/insegnamenti', 'CorsoDiStudiController@insegnamenti')
         ->name('cds.insegnamenti');  
 

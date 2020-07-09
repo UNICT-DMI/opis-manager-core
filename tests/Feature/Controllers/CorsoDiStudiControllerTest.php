@@ -48,6 +48,17 @@ class CorsoDiStudiControllerTest extends TestCase
     }
 
     /** @test */
+    public function can_return_the_full_list_of_corsi_di_studi(): void 
+    {
+        $this->seed(\DipartimentoTableSeeder::class);
+        $this->seed(\CorsoDiStudiTableSeeder::class);
+        $response = $this->json('GET',  '/api/v2/cds/all');
+
+        $response->assertStatus(200); 
+        $response->assertJson(CorsoDiStudi::all()->toArray()); 
+    }
+
+    /** @test */
     public function can_return_corso_di_studi_insegnamenti(): void
     {
         $this->seed(\DipartimentoTableSeeder::class);

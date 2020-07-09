@@ -25,6 +25,17 @@ class InsegnamentoController extends Controller
     }
     
     /**
+     * Ritorna la lista completa dei insegnamenti salvati 
+     * nella base di dati. 
+     * 
+     * @return Response
+     */
+    public function all (): Response
+    {
+        return response()->json(Insegnamento::all()); 
+    }
+
+    /**
      * Ritorna una lista di insegnamenti identificati dai dati passati
      * come parametri nella richiesta (codice gomp, anno accademico, 
      * canale (facoltativo), modulo (facoltativo)). All'interno di ogni 

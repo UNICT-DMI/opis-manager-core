@@ -65,6 +65,9 @@ Route::group(['prefix' => 'v2'], function() {
     Route::get('insegnamento', 'InsegnamentoController@index')
         ->name('insegnamento.index'); 
 
+    Route::get('insegnamento/all', 'InsegnamentoController@all')
+        ->name('insegnamento.all'); 
+
     Route::get('insegnamento/{codiceGomp}/schedeopis', 'InsegnamentoController@schedeOpis')
         ->name('insegnamento.schedeopis'); 
 

@@ -33,6 +33,19 @@ class InsegnamentoControllerTest extends TestCase
     }
 
     /** @test */
+    public function can_return_the_full_list_of_insegnamenti(): void 
+    {
+        $this->seed(\DipartimentoTableSeeder::class); 
+        $this->seed(\CorsoDiStudiTableSeeder::class); 
+        $this->seed(\InsegnamentoTableSeeder::class); 
+
+        $response = $this->json('GET',  '/api/v2/insegnamento/all');
+
+        $response->assertStatus(200); 
+        $response->assertJson(Insegnamento::all()->toArray()); 
+    }
+
+    /** @test */
     public function can_display_insegnamento_schede_opis(): void 
     {
         $this->seed(\DipartimentoTableSeeder::class); 

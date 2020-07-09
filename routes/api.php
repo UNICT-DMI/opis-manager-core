@@ -40,6 +40,9 @@ Route::group(['prefix' => 'v2'], function() {
 
     Route::get('dipartimento', 'DipartimentoController@index')
         ->name('dipartimento.index'); 
+    
+    Route::get('dipartimento/all', 'DipartimentoController@all')
+        ->name('dipartimento.all'); 
 
     Route::get('dipartimento/{unictId}/cds', 'DipartimentoController@corsiDiStudi')
         ->name('dipartimento.corsi_di_studi'); 

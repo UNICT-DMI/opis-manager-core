@@ -36,10 +36,20 @@ class DipartimentoControllerTest extends TestCase
     /** @test */
     public function cannot_return_dipartimenti_without_anno_accademico(): void
     {
-        $response = $response = $this->json('GET', '/api/v2/dipartimento');
+        $response = $this->json('GET', '/api/v2/dipartimento');
         
         $response->assertStatus(422); 
         $response->assertJson($this->missingAnnoAccademicoJson); 
+    }
+
+    /** @test */
+    public function can_return_the_full_list_of_dipartimenti(): void 
+    {
+        $this->seed(\DipartimentoTableSeeder::class);
+        $response = $this->json('GET',  '/api/v2/dipartimento/all');
+
+        $response->assertStatus(200); 
+        $response->assertJson(Dipartimento::all()->toArray()); 
     }
 
     /** @test */

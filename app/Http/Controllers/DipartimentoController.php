@@ -25,6 +25,17 @@ class DipartimentoController extends Controller
     }
     
     /**
+     * Ritorna la lista completa dei dipartimenti salvati nella base
+     * di dati. 
+     * 
+     * @return Response
+     */
+    public function all (): Response
+    {
+        return response()->json(Dipartimento::all()); 
+    }
+
+    /**
      * Ritorna la lista di corsi di studi associati al dipartimento
      * referenziato dall'unict id e dall'anno accademico passato come
      * parametro. 

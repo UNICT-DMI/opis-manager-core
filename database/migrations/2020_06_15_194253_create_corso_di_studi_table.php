@@ -16,9 +16,9 @@ class CreateCorsoDiStudiTable extends Migration
         Schema::create('corso_di_studi', function (Blueprint $table) {
 
             /**
-             * Identificativo progressivo 
+             * Identificativo progressivo
              */
-            $table->id(); 
+            $table->id();
 
             /**
              * Identificativo fornito dalla pagina unict QA
@@ -28,33 +28,33 @@ class CreateCorsoDiStudiTable extends Migration
             /**
              * Nome del corso di studi
              */
-            $table->string('nome'); 
+            $table->string('nome');
 
             /**
              * Classe del corso di studi
              */
-            $table->string('classe'); 
+            $table->string('classe');
 
             /**
              * Anno accademico di inserimento
              */
-            $table->string('anno_accademico');  
+            $table->string('anno_accademico');
 
             /**
              * Identificativo del dipartimento di appartenenza
              */
-            $table->unsignedBigInteger('id_dipartimento'); 
+            $table->unsignedBigInteger('id_dipartimento');
 
-            $table->foreign('id_dipartimento')
-                ->references('id')->on('dipartimento'); 
+            // $table->foreign('id_dipartimento');
+            //     ->references('id')->on('dipartimento');
 
             /**
-             * L'identificativo fornito dall'unict, insieme 
+             * L'identificativo fornito dall'unict, insieme
              * all'anno accademico, forniscono una chiave univoca
              * abbastanza scomoda da utilizzare. Tuttavia, è
-             * necessario garantirne l'univocità. 
+             * necessario garantirne l'univocità.
              */
-            $table->unique(['unict_id', 'anno_accademico']); 
+            $table->unique(['unict_id', 'anno_accademico']);
 
         });
     }

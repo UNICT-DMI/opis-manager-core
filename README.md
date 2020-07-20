@@ -24,10 +24,11 @@ You will need:
 * Composer
 * php-xml
 * php-mbstring
+* php-mysql
 
 In a debian-based you could install PHP 7.4 following [this guide](https://computingforgeeks.com/how-to-install-php-on-ubuntu/) and the related php extensions using:
 ```bash
-sudo apt install php-xml php-mbstring
+sudo apt install php-xml php-mbstring php-mysql
 ```
 
 #### Installing 

@@ -61,11 +61,16 @@ Install project dependencies
 ```sh
 $ composer install
 ```
+Set an application encryption key
+
+```sh
+$ php artisan key:generate
+```
 
 Generate a JWT secret
 
 ```sh
-$ php artisan key:generate
+$ php artisan jwt:generate
 ```
 
 Migrate the database schema

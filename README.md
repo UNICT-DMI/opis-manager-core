@@ -70,7 +70,7 @@ $ php artisan key:generate
 Generate a JWT secret
 
 ```sh
-$ php artisan jwt:generate
+$ php artisan jwt:secret
 ```
 
 Migrate the database schema

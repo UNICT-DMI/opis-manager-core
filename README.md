@@ -22,6 +22,13 @@ You will need:
 
 * PHP 7.3+
 * Composer
+* php-xml
+* php-mbstring
+
+In a debian-based you could install PHP 7.4 following [this guide](https://computingforgeeks.com/how-to-install-php-on-ubuntu/) and the related php extensions using:
+```bash
+sudo apt install php-xml php-mbstring
+```
 
 #### Installing 
 

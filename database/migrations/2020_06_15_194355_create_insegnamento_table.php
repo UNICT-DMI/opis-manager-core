@@ -59,7 +59,7 @@ class CreateInsegnamentoTable extends Migration
             /**
              * docente assegnato alla materia
              */
-            $table->string('docente', 40)
+            $table->string('docente', 100)
                 ->nullable()
                 ->default(NULL);
 
@@ -90,21 +90,21 @@ class CreateInsegnamentoTable extends Migration
             /**
              * ??
              */
-            $table->string('tipo', 2)
+            $table->string('tipo', 4)
                 ->nullable()
                 ->default(NULL);
 
             /**
              * campo di ricerca
              */
-            $table->string('ssd', 20)
+            $table->string('ssd', 100)
                 ->nullable()
                 ->default(NULL);
 
             /**
              * ??
              */
-            $table->string('assegn', 40)
+            $table->string('assegn', 100)
                 ->nullable()
                 ->default(NULL);
 

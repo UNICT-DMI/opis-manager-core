@@ -59,7 +59,7 @@ class CreateInsegnamentoTable extends Migration
             /**
              * docente assegnato alla materia
              */
-            $table->string('docente', 100)
+            $table->string('docente')
                 ->nullable()
                 ->default(NULL);
 
@@ -75,7 +75,7 @@ class CreateInsegnamentoTable extends Migration
              * Nel caso l'insegnamento disponga di più moduli,
              * si riporta l'identificativo di riferimento
              */
-            $table->string('id_modulo', 100)
+            $table->string('id_modulo')
                 ->nullable()
                 ->default(null);
 
@@ -83,7 +83,7 @@ class CreateInsegnamentoTable extends Migration
              * Nel caso l'insegnamento disponga di più moduli,
              * si riporta il nome modulo di riferimento
              */
-            $table->string('nome_modulo', 100)
+            $table->string('nome_modulo')
                 ->nullable()
                 ->default(null);
 

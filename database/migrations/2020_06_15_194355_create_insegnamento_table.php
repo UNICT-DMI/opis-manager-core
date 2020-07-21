@@ -34,7 +34,7 @@ class CreateInsegnamentoTable extends Migration
             /**
              * Nome dell'insegnamento
              */
-            $table->string('nome', 100);
+            $table->string('nome');
 
             /**
              * Anno accademico di inserimento

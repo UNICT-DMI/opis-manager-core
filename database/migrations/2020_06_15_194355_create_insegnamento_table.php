@@ -115,24 +115,6 @@ class CreateInsegnamentoTable extends Migration
 
             $table->foreign('id_cds')
                 ->references('id')->on('corso_di_studi');
-
-            /**
-             * L'identificativo fornito dall'unict, insieme
-             * all'anno accademico, forniscono una chiave univoca
-             * abbastanza scomoda da utilizzare. Tuttavia, è
-             * necessario garantirne l'univocità.
-             */
-            $table->unique([
-                'id_cds',
-                'codice_gomp',
-                'anno_accademico',
-                'id_modulo',
-                'canale',
-                'docente',
-                'assegn',
-                'tipo',
-                'anno'
-            ], 'unique_ins');
         });
     }
 

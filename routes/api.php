@@ -75,5 +75,9 @@ Route::group(['prefix' => 'v2'], function() {
         ->name('insegnamento.schedeopis.withid'); 
 
     Route::get('domande', 'DomandeController@index')
-        ->name('domande.index');  
+        ->name('domande.index');
+        
+    Route::get('domande/{domanda}', 'DomandeController@index')
+        ->name('domande.index');
+        
 }); 

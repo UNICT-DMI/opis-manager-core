@@ -16,5 +16,6 @@ class DatabaseSeeder extends Seeder
         $this->call(CorsoDiStudiTableSeeder::class);
         // $this->call(InsegnamentoTableSeeder::class);
         $this->call(SchedeOpisTableSeeder::class);
+        $this->call(StandardWeightSeeder::class); 
     }
 }

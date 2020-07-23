@@ -21,4 +21,25 @@ class Domanda extends Model
      * @var string
      */
     protected $table = 'domanda'; 
+    
+    /**
+     * The primary key associated with the table.
+     *
+     * @var string
+     */
+    protected $primaryKey = 'id'; 
+    
+    /**
+     * Indicates if the IDs are auto-incrementing.
+     *
+     * @var bool
+     */
+    public $incrementing = false; 
+
+    /**
+     * The "type" of the ID.
+     *
+     * @var string
+     */
+    protected $keyType = 'int'; 
 }

@@ -74,10 +74,11 @@ Route::group(['prefix' => 'v2'], function() {
     Route::get('insegnamento/with-id/{insegnamento}/schedeopis', 'InsegnamentoController@schedeOpisWithID')
         ->name('insegnamento.schedeopis.withid'); 
 
-    Route::get('domande', 'DomandeController@index')
+    Route::get('domande', 'DomandaController@index')
         ->name('domande.index');
         
-    Route::get('domande/{domanda}', 'DomandeController@index')
-        ->name('domande.index');
+    Route::put('domande/{domanda}', 'DomandaController@update')
+        ->name('domande.update')
+        ->middleware('weight.check');
         
 }); 

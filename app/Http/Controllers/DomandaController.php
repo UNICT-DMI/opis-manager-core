@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\UpdateDomandaRequest;
 use Symfony\Component\HttpFoundation\Response;
 
-class DomandeController extends Controller
+class DomandaController extends Controller
 {    
     /**
      * Ritorna la lista di tutte le domande con i relativi

@@ -18,7 +18,7 @@ class CorsoDiStudi extends Model
      */
     protected $fillable = [
         'unict_id', 'nome', 'classe', 'anno_accademico', 'id_dipartimento',  
-        'scostamento_numerosita', 'scostamento_media'
+        'scostamento_numerosita', 'scostamento_media', 'pesi_domande'
     ]; 
 
     /**
@@ -54,5 +54,4 @@ class CorsoDiStudi extends Model
     {
         return $this->hasMany('App\Models\Insegnamento', 'id_cds');
     }
-
 }

@@ -62,6 +62,9 @@ Route::group(['prefix' => 'v2'], function() {
     Route::get('cds/with-id/{cds}/insegnamenti', 'CorsoDiStudiController@insegnamentiWithID')
         ->name('cds.insegnamenti.withid');
 
+    Route::put('cds/{cds}/pesi', 'CorsoDiStudiController@updatePesi')
+        ->name('cds.pesi.update'); 
+
     Route::get('insegnamento', 'InsegnamentoController@index')
         ->name('insegnamento.index'); 
 

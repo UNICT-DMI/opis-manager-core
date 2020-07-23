@@ -74,7 +74,7 @@ class MatchPesiSchema implements Rule
     {
         $errorMessage = ""; 
         foreach ($this->jsonValidator->getErrors() as $error)
-            $errorMessage .= $error . ' \n'; 
+            $errorMessage .= $error['property'] . " " . $error['message'] . ' \n'; 
         return $errorMessage;
     }
 }

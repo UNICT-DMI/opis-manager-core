@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use App\Rules\PesiBilanciati;
+use App\Rules\MatchPesiSchema;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdatePesiCds extends FormRequest
@@ -25,7 +26,11 @@ class UpdatePesiCds extends FormRequest
     public function rules()
     {
         return [
-            'pesi' => ['required', 'json', new PesiBilanciati]
+            'pesi' => [
+                'bail', 'required', 'json', 
+                new MatchPesiSchema, 
+                new PesiBilanciati
+            ]
         ];
     }
 }

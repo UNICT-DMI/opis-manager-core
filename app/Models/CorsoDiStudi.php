@@ -16,7 +16,10 @@ class CorsoDiStudi extends Model
      * 
      * @var Array 
      */
-    protected $fillable = ['unict_id', 'nome', 'classe', 'anno_accademico', 'id_dipartimento']; 
+    protected $fillable = [
+        'unict_id', 'nome', 'classe', 'anno_accademico', 'id_dipartimento',  
+        'scostamento_numerosita', 'scostamento_media', 'pesi_domande'
+    ]; 
 
     /**
      * Tabella referenziata dal modello
@@ -51,5 +54,4 @@ class CorsoDiStudi extends Model
     {
         return $this->hasMany('App\Models\Insegnamento', 'id_cds');
     }
-
 }

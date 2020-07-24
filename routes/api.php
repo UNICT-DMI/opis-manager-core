@@ -62,6 +62,9 @@ Route::group(['prefix' => 'v2'], function() {
     Route::get('cds/with-id/{cds}/insegnamenti', 'CorsoDiStudiController@insegnamentiWithID')
         ->name('cds.insegnamenti.withid');
 
+    Route::put('cds/{cds}/pesi', 'CorsoDiStudiController@updatePesi')
+        ->name('cds.pesi.update'); 
+
     Route::get('insegnamento', 'InsegnamentoController@index')
         ->name('insegnamento.index'); 
 
@@ -74,4 +77,11 @@ Route::group(['prefix' => 'v2'], function() {
     Route::get('insegnamento/with-id/{insegnamento}/schedeopis', 'InsegnamentoController@schedeOpisWithID')
         ->name('insegnamento.schedeopis.withid'); 
 
+    Route::get('domande', 'DomandaController@index')
+        ->name('domande.index');
+        
+    Route::put('domande/{domanda}', 'DomandaController@update')
+        ->name('domande.update')
+        ->middleware('weight.check');
+        
 }); 

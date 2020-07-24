@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\CorsoDiStudi;
 use Illuminate\Http\Request;
 use App\Http\Requests\YearRequest;
+use App\Http\Requests\UpdatePesiCds;
 use Symfony\Component\HttpFoundation\Response;
 
 class CorsoDiStudiController extends Controller
@@ -61,5 +62,18 @@ class CorsoDiStudiController extends Controller
     public function insegnamentiWithID(CorsoDiStudi $cds): Response
     {
         return response()->json($cds->insegnamenti); 
+    }
+    
+    /**
+     * updatePesi
+     *
+     * @param  CorsoDiStudi $cds
+     * @param  UpdatePesiCds $request
+     * @return void
+     */
+    public function updatePesi(CorsoDiStudi $cds, UpdatePesiCds $request): void 
+    {
+        $cds->pesi_domande = $request->pesi; 
+        $cds->save(); 
     }
 }

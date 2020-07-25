@@ -167,7 +167,7 @@ class CorsoDiStudiControllerTest extends TestCase
         $cds = CorsoDiStudi::first(); 
         $response = $this->json(
             'PUT', 
-            '/api/v2/cds/' . $cds->id . "/pesi",
+            '/api/v2/cds/with-id/' . $cds->id . "/pesi",
             ['pesi' => $this->validSampleJson]    
         ); 
 
@@ -189,7 +189,7 @@ class CorsoDiStudiControllerTest extends TestCase
         $cds = CorsoDiStudi::first(); 
         $response = $this->json(
             'PUT', 
-            '/api/v2/cds/' . $cds->id . "/pesi",
+            '/api/v2/cds/with-id/' . $cds->id . "/pesi",
             ['pesi' => $this->sumGreaterThanOneSampleJson]    
         ); 
 
@@ -211,7 +211,7 @@ class CorsoDiStudiControllerTest extends TestCase
         $cds = CorsoDiStudi::first(); 
         $response = $this->json(
             'PUT', 
-            '/api/v2/cds/' . $cds->id . "/pesi",
+            '/api/v2/cds/with-id/' . $cds->id . "/pesi",
             ['pesi' => $this->invalidJsonSchemaSampleJson]    
         ); 
 

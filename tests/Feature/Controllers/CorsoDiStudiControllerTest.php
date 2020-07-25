@@ -4,6 +4,7 @@ namespace Tests\Feature\Controllers;
 
 use Tests\TestCase;
 use App\Models\CorsoDiStudi;
+use App\Http\Resources\CoarseCorsoDiStudi;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
@@ -216,5 +217,24 @@ class CorsoDiStudiControllerTest extends TestCase
         ); 
 
         $response->assertStatus(422);
+    }
+
+    /** @test */
+    public function can_get_all_schede_opis_relative_to_cds_corresponding_to_an_unict_id(): void 
+    {
+        $this->seed(\DipartimentoTableSeeder::class);
+        $this->seed(\CorsoDiStudiTableSeeder::class);
+        $this->seed(\SchedeOpisTableSeeder::class); 
+
+        $randomCds = CorsoDiStudi::first(); 
+
+        $response = $this->json('GET', 'api/v2/cds/coarse/'. $randomCds->unict_id . '/schedeopis'); 
+
+        $cdsCollection = CorsoDiStudi::where('unict_id', $randomCds->unict_id)->get(); 
+
+        $correctDataToRetrieve = json_decode(CoarseCorsoDiStudi::collection($cdsCollection)->toJson(), true); 
+
+        $response->assertOk(); 
+        $response->assertJson($correctDataToRetrieve); 
     }
 }

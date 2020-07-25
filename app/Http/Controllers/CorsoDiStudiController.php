@@ -6,7 +6,9 @@ use App\Models\CorsoDiStudi;
 use Illuminate\Http\Request;
 use App\Http\Requests\YearRequest;
 use App\Http\Requests\UpdatePesiCds;
+use App\Http\Resources\CoarseCorsoDiStudi;
 use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Http\Resources\Json\JsonResource;
 
 class CorsoDiStudiController extends Controller
 {    
@@ -33,6 +35,22 @@ class CorsoDiStudiController extends Controller
     public function all (): Response
     {
         return response()->json(CorsoDiStudi::all()); 
+    }
+
+        
+    /**
+     * Dato un CDS in input, dare in output tutte le schede opis di 
+     * tutti gli insegnamenti del CDS di tutti gli anni accademici
+     * - issue #11
+     * 
+     * @param  int $unictId
+     * @return JsonResource
+     */
+    public function searchSchedeOpisUsingUnictId (int $unictId): JsonResource 
+    {
+        $cdsCollection = CorsoDiStudi::where('unict_id', $unictId)->get(); 
+
+        return CoarseCorsoDiStudi::collection($cdsCollection); 
     }
 
     /**

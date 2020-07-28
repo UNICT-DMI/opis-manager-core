@@ -5,6 +5,7 @@ namespace Tests\Feature\Controllers;
 use Tests\TestCase;
 use App\Models\SchedeOpis;
 use App\Models\Insegnamento;
+use App\Http\Resources\CoarseInsegnamento;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
@@ -101,5 +102,60 @@ class InsegnamentoControllerTest extends TestCase
 
         $response->assertStatus(200); 
         $response->assertJson($insegnamento->schedeOpis->toArray()); 
+    }
+
+    /**
+     * Preambolo: prima di cimentarsi nella comprensione del test, leggere
+     * lo scenario presentato nel seeder InsegnamentoCanaliSeeder. 
+     * 
+     * @test
+    */
+    public function can_get_coarse_data_using_unict_attributes(): void 
+    {
+        $this->seed(\DipartimentoTableSeeder::class); 
+        $this->seed(\InsegnamentoCanaliSeeder::class);         
+
+        $insegnamento = Insegnamento::first(); 
+        $route = 'api/v2/insegnamento/coarse/' . $insegnamento->codice_gomp . '/schedeopis'; 
+
+        $response = $this->json('GET', $route, ['canale' => 'AL']); 
+
+        $highLevelData = Insegnamento::where('codice_gomp', $insegnamento->codice_gomp)
+            ->where('canale', 'AL')
+            ->orWhere('canale', null)
+            ->get(); 
+
+        $deepLevelData = CoarseInsegnamento::collection($highLevelData); 
+        $dataToArray = json_decode($deepLevelData->toJson(), true); 
+
+        $response->assertOk(); 
+        $response->assertJson($dataToArray); 
+    }
+
+    /**
+     * Preambolo: prima di cimentarsi nella comprensione del test, leggere
+     * lo scenario presentato nel seeder InsegnamentoCanaliSeeder. 
+     * Si vuole provare che, considerato il canale AL del corso di architettura, 
+     * non siano presenti anche i canali MZ, ma al più i corsi di anni precedenti
+     * esenti dalla suddivisione in canali. 
+     * 
+     * @test
+    */
+    public function can_get_linear_history_of_insegnamento_using_coarse_api(): void 
+    {
+        $this->seed(\DipartimentoTableSeeder::class); 
+        $this->seed(\InsegnamentoCanaliSeeder::class);         
+
+        $insegnamento = Insegnamento::first(); 
+        $route = 'api/v2/insegnamento/coarse/' . $insegnamento->codice_gomp . '/schedeopis'; 
+
+        $response = $this->json('GET', $route, ['canale' => 'AL']); 
+
+        $numberOfMzChannels = $response->original
+                ->map(function (CoarseInsegnamento $i) {return $i->canale;})
+                ->filter(function (?string $canale) {return $canale == 'MZ';})
+                ->count(); 
+
+        $this->assertTrue($numberOfMzChannels == 0); 
     }
 }

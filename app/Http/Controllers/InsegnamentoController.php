@@ -6,7 +6,10 @@ use App\Models\Insegnamento;
 use Illuminate\Http\Request;
 use App\Http\Requests\YearRequest;
 use App\Http\Requests\InsegnamentoRequest;
+use App\Http\Resources\CoarseInsegnamento;
+use App\Http\Requests\InsegnamentoAttributes;
 use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Http\Resources\Json\JsonResource;
 
 class InsegnamentoController extends Controller
 {    
@@ -34,6 +37,29 @@ class InsegnamentoController extends Controller
     {
         return response()->json(Insegnamento::all()); 
     }
+    
+    /**
+     * Dato un insegnamento in input, dare in output tutte le 
+     * schede opis di tutti gli anni accademici di quell'insegnamento
+     *
+     * @param  int $codiceGomp
+     * @param  InsegnamentoAttributes $request
+     * @return JsonResource
+     */
+    public function getOpisByUnictData(int $codiceGomp, InsegnamentoAttributes $request): JsonResource
+    {
+        $insegnamenti = Insegnamento::where('codice_gomp', $codiceGomp); 
+
+        if ($request->has('id_modulo'))
+            $insegnamenti->where('id_modulo', $request->id_modulo); 
+
+        if ($request->has('canale')) {
+            $insegnamenti->where('canale', $request->canale)
+                ->orWhere('canale', NULL); 
+        }
+
+        return CoarseInsegnamento::collection($insegnamenti->get()); 
+    }
 
     /**
      * Ritorna una lista di insegnamenti identificati dai dati passati
@@ -56,7 +82,7 @@ class InsegnamentoController extends Controller
             $insegnamenti->where('id_modulo', $request->id_modulo); 
 
         if ($request->has('canale'))
-            $insegnamenti->where('id_modulo', $request->canale); 
+            $insegnamenti->where('canale', $request->canale); 
 
         return response()->json($insegnamenti->with('schedeOpis')->get()); 
     }

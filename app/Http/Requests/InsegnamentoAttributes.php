@@ -2,9 +2,9 @@
 
 namespace App\Http\Requests;
 
-use App\Http\Requests\InsegnamentoAttributes;
+use Illuminate\Foundation\Http\FormRequest;
 
-class InsegnamentoRequest extends InsegnamentoAttributes
+class InsegnamentoAttributes extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +13,7 @@ class InsegnamentoRequest extends InsegnamentoAttributes
      */
     public function authorize()
     {
-        return parent::authorize();
+        return true;
     }
 
     /**
@@ -23,8 +23,9 @@ class InsegnamentoRequest extends InsegnamentoAttributes
      */
     public function rules()
     {
-        $imposeAnnoAccademico = ['anno_accademico' => 'required|string']; 
-
-        return array_merge(parent::rules(), $imposeAnnoAccademico); 
+        return [
+            'id_modulo' => 'numeric', 
+            'canale'    => 'string'
+        ];
     }
 }

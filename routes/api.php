@@ -74,6 +74,9 @@ Route::group(['prefix' => 'v2'], function() {
     Route::get('insegnamento/all', 'InsegnamentoController@all')
         ->name('insegnamento.all'); 
 
+    Route::get('insegnamento/coarse/{codice_gomp}/schedeopis', 'InsegnamentoController@getOpisByUnictData')
+        ->name('insegnamento.coarse.schedeopis'); 
+
     Route::get('insegnamento/{codiceGomp}/schedeopis', 'InsegnamentoController@schedeOpis')
         ->name('insegnamento.schedeopis'); 
 

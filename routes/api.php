@@ -56,13 +56,16 @@ Route::group(['prefix' => 'v2'], function() {
     Route::get('cds/all', 'CorsoDiStudiController@all')
         ->name('cds.all'); 
 
+    Route::get('cds/coarse/{unict_id}/schedeopis', 'CorsoDiStudiController@searchSchedeOpisUsingUnictId')
+        ->name('cds.coarse.schedeopis'); 
+
     Route::get('cds/{unictId}/insegnamenti', 'CorsoDiStudiController@insegnamenti')
         ->name('cds.insegnamenti');  
 
     Route::get('cds/with-id/{cds}/insegnamenti', 'CorsoDiStudiController@insegnamentiWithID')
         ->name('cds.insegnamenti.withid');
 
-    Route::put('cds/{cds}/pesi', 'CorsoDiStudiController@updatePesi')
+    Route::put('cds/with-id/{cds}/pesi', 'CorsoDiStudiController@updatePesi')
         ->name('cds.pesi.update'); 
 
     Route::get('insegnamento', 'InsegnamentoController@index')
@@ -70,6 +73,9 @@ Route::group(['prefix' => 'v2'], function() {
 
     Route::get('insegnamento/all', 'InsegnamentoController@all')
         ->name('insegnamento.all'); 
+
+    Route::get('insegnamento/coarse/{codice_gomp}/schedeopis', 'InsegnamentoController@getOpisByUnictData')
+        ->name('insegnamento.coarse.schedeopis'); 
 
     Route::get('insegnamento/{codiceGomp}/schedeopis', 'InsegnamentoController@schedeOpis')
         ->name('insegnamento.schedeopis'); 

@@ -13,6 +13,4 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return response()->json(['status' => 'up']);
-});
+Route::get('/', 'StatusController@getStatus')->name('app.status');

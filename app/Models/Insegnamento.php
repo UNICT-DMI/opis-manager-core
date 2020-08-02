@@ -50,6 +50,6 @@ class Insegnamento extends Model
      */
     public function schedeOpis(): Relation
     {
-        return $this->hasMany('App\Models\SchedeOpis', 'id_insegnamento');
+        return $this->hasOne('App\Models\SchedeOpis', 'id_insegnamento');
     }
 }

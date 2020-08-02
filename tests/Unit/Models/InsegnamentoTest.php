@@ -7,8 +7,8 @@ use App\Models\SchedeOpis;
 use App\Models\CorsoDiStudi;
 use App\Models\Insegnamento;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class InsegnamentoTest extends TestCase
@@ -62,27 +62,27 @@ class InsegnamentoTest extends TestCase
         $schedeOpis->id_insegnamento = $insegnamento->id; 
         $schedeOpis->save(); 
 
-        $this->assertEquals($insegnamento->schedeOpis[0]->id, $schedeOpis->id); 
+        $this->assertEquals($insegnamento->schedeOpis->id, $schedeOpis->id); 
     }
 
     /** @test */
-    public function schede_opis_attribute_is_instance_of_collection(): void
+    public function schede_opis_attribute_is_instance_of_SchedeOpis(): void
     {
         $this->seed(\DipartimentoTableSeeder::class);
         $this->seed(\CorsoDiStudiTableSeeder::class);
         $this->seed(\SchedeOpisTableSeeder::class);
         
-        $this->assertTrue(Insegnamento::first()->schedeOpis instanceof Collection); 
+        $this->assertTrue(Insegnamento::first()->schedeOpis instanceof SchedeOpis); 
     }
 
     /** @test */
-    public function schede_opis_function_is_instance_of_has_many(): void
+    public function schede_opis_function_is_instance_of_has_one(): void
     {
         $this->seed(\DipartimentoTableSeeder::class);
         $this->seed(\CorsoDiStudiTableSeeder::class);
         $this->seed(\SchedeOpisTableSeeder::class);
         
-        $this->assertTrue(Insegnamento::first()->schedeOpis() instanceof HasMany); 
+        $this->assertTrue(Insegnamento::first()->schedeOpis() instanceof HasOne); 
     }
 
     /** @test */
@@ -92,6 +92,6 @@ class InsegnamentoTest extends TestCase
         $this->seed(\CorsoDiStudiTableSeeder::class);
         $this->seed(\SchedeOpisTableSeeder::class);
 
-        $this->assertTrue(Insegnamento::first()->schedeOpis[0] instanceof SchedeOpis); 
+        $this->assertTrue(Insegnamento::first()->schedeOpis instanceof SchedeOpis); 
     }
 }

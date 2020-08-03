@@ -149,11 +149,11 @@ class InsegnamentoControllerTest extends TestCase
         $insegnamento = Insegnamento::first(); 
         $route = 'api/v2/insegnamento/coarse/' . $insegnamento->codice_gomp . '/schedeopis'; 
 
-        $response = $this->json('GET', $route, ['canale' => 'AL']); 
+        $response = $this->json('GET', $route, ['canale' => 'A-L']); 
 
         $numberOfMzChannels = $response->original
                 ->map(function (CoarseInsegnamento $i) {return $i->canale;})
-                ->filter(function (?string $canale) {return $canale == 'MZ';})
+                ->filter(function (?string $canale) {return $canale == 'M-Z';})
                 ->count(); 
 
         $this->assertTrue($numberOfMzChannels == 0); 

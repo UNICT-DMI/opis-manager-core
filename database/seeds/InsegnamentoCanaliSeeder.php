@@ -46,41 +46,41 @@ class InsegnamentoCanaliSeeder extends Seeder
         /** corso ADE 2014/2015 */
         Insegnamento::create(array_merge(
             $basicInformations, 
-            ['anno_accademico' => '2014/2015', 'canale' => null, 'docente' => 'Scollo Giuseppe']
+            ['anno_accademico' => '2014/2015', 'canale' => 'no', 'docente' => 'Scollo Giuseppe']
         )); 
 
         /** corso ADE 2015/2016 */
         Insegnamento::create(array_merge(
             $basicInformations, 
-            ['anno_accademico' => '2015/2016', 'canale' => null, 'docente' => 'Scollo Giuseppe']
+            ['anno_accademico' => '2015/2016', 'canale' => 'no', 'docente' => 'Scollo Giuseppe']
         )); 
 
         /** corso ADE 2016/2017 */
         Insegnamento::create(array_merge(
             $basicInformations, 
-            ['anno_accademico' => '2016/2017', 'canale' => null, 'docente' => 'Scollo Giuseppe']
+            ['anno_accademico' => '2016/2017', 'canale' => 'no', 'docente' => 'Scollo Giuseppe']
         )); 
         
         /** corso ADE 2017/2018 */
         Insegnamento::create(array_merge(
             $basicInformations, 
-            ['anno_accademico' => '2017/2018', 'canale' => 'AL', 'docente' => 'Scollo Giuseppe']
+            ['anno_accademico' => '2017/2018', 'canale' => 'A-L', 'docente' => 'Scollo Giuseppe']
         )); 
 
         Insegnamento::create(array_merge(
             $basicInformations, 
-            ['anno_accademico' => '2017/2018', 'canale' => 'MZ', 'docente' => 'Napoli Christian']
+            ['anno_accademico' => '2017/2018', 'canale' => 'M-Z', 'docente' => 'Napoli Christian']
         )); 
 
         /** corso ADE 2018/2019 */
         Insegnamento::create(array_merge(
             $basicInformations, 
-            ['anno_accademico' => '2018/2019', 'canale' => 'AL', 'docente' => 'Scollo Giuseppe']
+            ['anno_accademico' => '2018/2019', 'canale' => 'A-L', 'docente' => 'Scollo Giuseppe']
         )); 
 
         Insegnamento::create(array_merge(
             $basicInformations, 
-            ['anno_accademico' => '2018/2019', 'canale' => 'MZ', 'docente' => 'Napoli Christian']
+            ['anno_accademico' => '2018/2019', 'canale' => 'M-Z', 'docente' => 'Napoli Christian']
         )); 
 
     }

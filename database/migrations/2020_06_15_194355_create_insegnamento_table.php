@@ -68,16 +68,14 @@ class CreateInsegnamentoTable extends Migration
              * si riporta il canale di riferimento
              */
             $table->string('canale', 8)
-                ->nullable()
-                ->default('');
+                ->default('no');
 
             /**
              * Nel caso l'insegnamento disponga di più moduli,
              * si riporta l'identificativo di riferimento
              */
             $table->string('id_modulo')
-                ->nullable()
-                ->default(null);
+                ->default(0);
 
             /**
              * Nel caso l'insegnamento disponga di più moduli,

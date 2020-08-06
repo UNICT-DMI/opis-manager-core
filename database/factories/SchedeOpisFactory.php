@@ -13,6 +13,7 @@ $factory->define(SchedeOpis::class, function (Faker $faker) {
     $totalSchedeOpisNf  = 5 + (rand() % 15); 
 
     $questions = range(0, 44); 
+    shuffle($questions); 
     $maxInsegnamentoProgressive = Insegnamento::max('id');
 
     return [
@@ -30,7 +31,7 @@ $factory->define(SchedeOpis::class, function (Faker $faker) {
         'ragg_uni'          => null, 
         'studio_gg'         => null, 
         'studio_tot'        => null, 
-        'domande'           => json_encode(shuffle($questions)), 
+        'domande'           => json_encode($questions), 
         'domande_nf'        => json_encode(array_fill(0, 11, '')), 
         'motivo_nf'         => json_encode([]), 
         'sugg'              => json_encode([]), 

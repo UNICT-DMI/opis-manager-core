@@ -68,16 +68,17 @@ class InsegnamentoControllerTest extends TestCase
             $query
         );
 
-        $jsonResponse = Insegnamento::where('codice_gomp', $insegnamento->codice_gomp)
+        $insegnamenti = Insegnamento::where('codice_gomp', $insegnamento->codice_gomp)
             ->where('anno_accademico', '2017/2018')
             ->where('id_modulo', $insegnamento->id_modulo)
             ->where('canale', $insegnamento->canale)
-            ->with('schedeOpis')
-            ->get()
-            ->toArray();
-
+            ->get(); 
+        
+        $deepLevelData = CoarseInsegnamento::collection($insegnamenti); 
+        $dataToArray = json_decode($deepLevelData->toJson(), true); 
+    
         $response->assertStatus(200); 
-        $response->assertJson($jsonResponse); 
+        $response->assertJson($dataToArray); 
     }
 
     /** @test */

@@ -12,7 +12,7 @@ $factory->define(SchedeOpis::class, function (Faker $faker) {
     $totalSchedeOpis    = 20 + (rand() % 80); 
     $totalSchedeOpisNf  = 5 + (rand() % 15); 
 
-    $questions = range(0, 44); 
+    $questions = range(0, 55); 
     shuffle($questions); 
     $maxInsegnamentoProgressive = Insegnamento::max('id');
 

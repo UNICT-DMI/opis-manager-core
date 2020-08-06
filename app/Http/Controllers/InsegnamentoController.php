@@ -84,7 +84,7 @@ class InsegnamentoController extends Controller
         if ($request->has('canale'))
             $insegnamenti->where('canale', $request->canale); 
 
-        return response()->json($insegnamenti->with('schedeOpis')->get()); 
+        return response()->json(CoarseInsegnamento::collection($insegnamenti->get()));  
     }
 
     /**

@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Http\Resources\StructuredSchedeOpis;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class CoarseInsegnamento extends JsonResource
@@ -16,7 +17,8 @@ class CoarseInsegnamento extends JsonResource
     {
         $resourceToArray = parent::toArray($request); 
 
-        $additionalCoarseInformations = ['schedeopis' => $this->schedeOpis]; 
+        $additionalCoarseInformations = 
+            ['schedeopis' => new StructuredSchedeOpis($this->schedeOpis)]; 
 
         return array_merge($resourceToArray, $additionalCoarseInformations); 
     }

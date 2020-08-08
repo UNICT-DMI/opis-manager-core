@@ -17,6 +17,13 @@ class StructuredSchedeOpis extends JsonResource
         $resourceToArray = parent::toArray($request); 
         $domandeArray = json_decode($resourceToArray['domande'], true);
 
+        // a causa dello scraping, può capitare che le domande
+        // non siano state correttamente inserite nella tabella 
+        if (!is_array($domandeArray)) {
+            $resourceToArray['domande'] = null;    
+            return $resourceToArray; 
+        }
+
         // per incertezza sulla provenienza dei dati, viene convertito ogni elemento
         // ad un valore intero
         $domandeArray = array_map('intval', $domandeArray); 
@@ -26,7 +33,7 @@ class StructuredSchedeOpis extends JsonResource
         // ciascuno. 
         $splittedArray = array_chunk($domandeArray, 5);
 
-        $resourceToArray['domande'] = \json_encode($splittedArray);  
+        $resourceToArray['domande'] = $splittedArray;  
         return $resourceToArray;
     }
 }

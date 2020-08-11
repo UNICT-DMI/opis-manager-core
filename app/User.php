@@ -2,10 +2,11 @@
 
 namespace App;
 
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Notifications\Notifiable;
 use Tymon\JWTAuth\Contracts\JWTSubject; 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable implements JWTSubject
 {
@@ -56,5 +57,16 @@ class User extends Authenticatable implements JWTSubject
     public function getJWTCustomClaims()
     {
         return [];
+    }
+
+    /**
+     * (mutator) set password attribute 
+     *
+     * @param  string $password
+     * @return void
+     */
+    public function setPasswordAttribute (string $password): void 
+    {
+        $this->attributes['password'] = Hash::make($password); 
     }
 }

@@ -5,6 +5,7 @@ namespace Tests\Feature\Controllers\Auth;
 use App\User;
 use Tests\TestCase;
 use Tymon\JWTAuth\Facades\JWTAuth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Foundation\Testing\WithFaker;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -56,6 +57,21 @@ class AuthenticationControllerTest extends TestCase
         ]); 
 
         $response->assertStatus(422); 
+    }
+
+    /** @test */
+    public function user_password_is_hashed_in_database(): void
+    {
+        $response = $this->post('api/auth/signup', [
+            'nome' => 'Mario', 
+            'cognome' => 'Rossi',
+            'email' => 'example@example.com', 
+            'password' => 'Password33', 
+            'password_confirmation' => 'Password33'
+        ]); 
+
+        $newUser = User::where('email', 'example@example.com')->first(); 
+        $this->assertTrue(Hash::check('Password33', $newUser->password)); 
     }
 
     /** @test */

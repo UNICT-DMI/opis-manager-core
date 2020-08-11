@@ -24,7 +24,7 @@ $factory->define(User::class, function (Faker $faker) {
         'cognome' => $faker->lastName,
         'email' => $faker->unique()->safeEmail,
         'email_verified_at' => now(),
-        'password' => Hash::make('Password33'),
+        'password' => 'Password33', // will be hashed by mutator
         'remember_token' => Str::random(10),
     ];
 });

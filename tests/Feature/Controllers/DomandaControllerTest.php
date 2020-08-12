@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Controllers;
 
+use App\User;
 use Tests\TestCase;
 use App\Models\Domanda;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -25,7 +26,10 @@ class DomandaControllerTest extends TestCase
     public function cannot_update_group_if_sum_become_more_than_1(): void 
     {
         $this->seed(\StandardWeightSeeder::class);
-        $response = $this->json('PUT', '/api/v2/domande/1', ['gruppo' => 'V2']);
+        $user = factory(User::class)->create();
+
+        $response = $this->actingAs($user)
+            ->json('PUT', '/api/v2/domande/1', ['gruppo' => 'V2']);
 
         $response->assertStatus(400); 
     }
@@ -34,8 +38,33 @@ class DomandaControllerTest extends TestCase
     public function can_update_group_with_a_sum_less_than_1(): void 
     {
         $this->seed(\StandardWeightSeeder::class);
-        $response = $this->json('PUT', '/api/v2/domande/1', ['gruppo' => 'V4']);
+        $user = factory(User::class)->create();
 
+        $response = $this->actingAs($user)
+            ->json('PUT', '/api/v2/domande/1', ['gruppo' => 'V4']);
+
+        $response->assertOk(); 
+    }
+
+    /** @test */
+    public function cannot_update_without_authentication(): void 
+    {
+        $this->seed(\StandardWeightSeeder::class);
+        $user = factory(User::class)->create();
+
+        $response = $this->json('PUT', '/api/v2/domande/1', ['gruppo' => 'V4']);
+        $response->assertUnauthorized(); 
+    }
+
+    /** @test */
+    public function can_update_if_authenticated(): void 
+    {
+        $this->seed(\StandardWeightSeeder::class);
+        $user = factory(User::class)->create();
+        $token = auth()->login($user);
+
+        $response = $this->withHeaders(['Authorization' => 'Bearer ' . $token])
+            ->json('PUT', '/api/v2/domande/1', ['gruppo' => 'V4']);
         $response->assertOk(); 
     }
 
@@ -43,13 +72,15 @@ class DomandaControllerTest extends TestCase
     public function cannot_update_peso_standard_if_sum_is_more_than_1(): void
     {
         $this->seed(\StandardWeightSeeder::class);
+        $user = factory(User::class)->create();
 
         $domanda = Domanda::first(); 
         $pesoGruppoDomanda = Domanda::where('gruppo', $domanda->gruppo)->sum('gruppo'); 
         $pesoGruppoDomanda -= $domanda->peso_standard; 
         $newPesoIrregolare = 1 - $pesoGruppoDomanda + 0.1;  
 
-        $response = $this->json('PUT', '/api/v2/domande/1', ['peso_standard' => $newPesoIrregolare]);
+        $response = $this->actingAs($user)
+            ->json('PUT', '/api/v2/domande/1', ['peso_standard' => $newPesoIrregolare]);
         $response->assertStatus(400); 
     }
 
@@ -58,11 +89,13 @@ class DomandaControllerTest extends TestCase
     public function can_update_peso_standard_if_sum_is_less_than_1(): void
     {
         $this->seed(\StandardWeightSeeder::class);
+        $user = factory(User::class)->create();
 
         $domanda = Domanda::first(); 
         $newPesoRegolare = $domanda->peso_standard - 0.1;  
 
-        $response = $this->json('PUT', '/api/v2/domande/1', ['peso_standard' => $newPesoRegolare]);
+        $response = $this->actingAs($user)
+            ->json('PUT', '/api/v2/domande/1', ['peso_standard' => $newPesoRegolare]);
         $response->assertOk(); 
     }
 
@@ -70,6 +103,7 @@ class DomandaControllerTest extends TestCase
     public function can_update_both_group_and_peso_standard(): void
     {
         $this->seed(\StandardWeightSeeder::class);
+        $user = factory(User::class)->create();
 
         $domandaGruppoV1 = Domanda::where('gruppo', 'V1')->first();
         $domandaGruppoV2 = Domanda::where('gruppo', 'V2')->first(); 
@@ -77,7 +111,8 @@ class DomandaControllerTest extends TestCase
         $newPesoStandard = $domandaGruppoV2->peso_standard; 
         $domandaGruppoV2->delete(); 
 
-        $response = $this->json('PUT', '/api/v2/domande/' . $domandaGruppoV1->id, [
+        $response = $this->actingAs($user)
+            ->json('PUT', '/api/v2/domande/' . $domandaGruppoV1->id, [
             'peso_standard' => $newPesoStandard, 
             'gruppo' => 'V2'
         ]);

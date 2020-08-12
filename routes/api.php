@@ -66,7 +66,8 @@ Route::group(['prefix' => 'v2'], function() {
         ->name('cds.insegnamenti.withid');
 
     Route::put('cds/with-id/{cds}/pesi', 'CorsoDiStudiController@updatePesi')
-        ->name('cds.pesi.update'); 
+        ->name('cds.pesi.update')
+        ->middleware('auth:api'); 
 
     Route::get('insegnamento', 'InsegnamentoController@index')
         ->name('insegnamento.index'); 
@@ -88,6 +89,7 @@ Route::group(['prefix' => 'v2'], function() {
         
     Route::put('domande/{domanda}', 'DomandaController@update')
         ->name('domande.update')
-        ->middleware('weight.check');
+        ->middleware('weight.check')
+        ->middleware('auth:api'); 
         
 }); 

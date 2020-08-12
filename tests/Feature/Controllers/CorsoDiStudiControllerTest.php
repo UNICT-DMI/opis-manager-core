@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Controllers;
 
+use App\User;
 use Tests\TestCase;
 use App\Models\CorsoDiStudi;
 use App\Http\Resources\CoarseCorsoDiStudi;
@@ -166,7 +167,9 @@ class CorsoDiStudiControllerTest extends TestCase
         $this->seed(\CorsoDiStudiTableSeeder::class);
 
         $cds = CorsoDiStudi::first(); 
-        $response = $this->json(
+        $user = factory(User::class)->create();
+
+        $response = $this->actingAs($user)->json(
             'PUT', 
             '/api/v2/cds/with-id/' . $cds->id . "/pesi",
             ['pesi' => $this->validSampleJson]    
@@ -188,7 +191,9 @@ class CorsoDiStudiControllerTest extends TestCase
         $this->seed(\CorsoDiStudiTableSeeder::class);
 
         $cds = CorsoDiStudi::first(); 
-        $response = $this->json(
+        $user = factory(User::class)->create();
+
+        $response = $this->actingAs($user)->json(
             'PUT', 
             '/api/v2/cds/with-id/' . $cds->id . "/pesi",
             ['pesi' => $this->sumGreaterThanOneSampleJson]    
@@ -210,13 +215,48 @@ class CorsoDiStudiControllerTest extends TestCase
         $this->seed(\CorsoDiStudiTableSeeder::class);
 
         $cds = CorsoDiStudi::first(); 
-        $response = $this->json(
+        $user = factory(User::class)->create();
+
+        $response = $this->actingAs($user)->json(
             'PUT', 
             '/api/v2/cds/with-id/' . $cds->id . "/pesi",
             ['pesi' => $this->invalidJsonSchemaSampleJson]    
         ); 
 
         $response->assertStatus(422);
+    }
+
+    /** @test */
+    public function can_update_pesi_domande_if_logged_in(): void 
+    {
+        $this->seed(\DipartimentoTableSeeder::class);
+        $this->seed(\CorsoDiStudiTableSeeder::class);
+        $user   = factory(User::class)->create();
+        $token  = auth()->login($user); 
+        $cds    = CorsoDiStudi::first(); 
+        $route  = '/api/v2/cds/with-id/' . $cds->id . '/pesi'; 
+
+        $response = $this->withHeaders(['Authorization' => 'Bearer ' . $token])
+            ->json('PUT', $route, ['pesi' => $this->validSampleJson]); 
+
+        $response->assertOk();
+    }
+
+    /** @test */
+    public function cannot_update_pesi_domande_without_being_logged_in(): void 
+    {
+        $this->seed(\DipartimentoTableSeeder::class);
+        $this->seed(\CorsoDiStudiTableSeeder::class);
+        $user = factory(User::class)->create();
+        $cds = CorsoDiStudi::first(); 
+
+        $response = $this->json(
+            'PUT', 
+            '/api/v2/cds/with-id/' . $cds->id . "/pesi",
+            ['pesi' => $this->validSampleJson]    
+        ); 
+
+        $response->assertUnauthorized();
     }
 
     /** @test */

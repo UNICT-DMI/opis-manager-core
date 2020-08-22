@@ -91,5 +91,8 @@ Route::group(['prefix' => 'v2'], function() {
         ->name('domande.update')
         ->middleware('weight.check')
         ->middleware('auth:api'); 
-        
+    
+    Route::put('domande', 'DomandaController@updateAll')
+        ->name('domande.updateAll') 
+        ->middleware('auth:api'); 
 }); 

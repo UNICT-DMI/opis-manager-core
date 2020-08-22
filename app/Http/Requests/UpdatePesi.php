@@ -6,7 +6,7 @@ use App\Rules\PesiBilanciati;
 use App\Rules\MatchPesiSchema;
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdatePesiCds extends FormRequest
+class UpdatePesi extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

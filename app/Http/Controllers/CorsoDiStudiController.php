@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\CorsoDiStudi;
 use Illuminate\Http\Request;
+use App\Http\Requests\UpdatePesi;
 use App\Http\Requests\YearRequest;
-use App\Http\Requests\UpdatePesiCds;
 use App\Http\Resources\CoarseCorsoDiStudi;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -89,7 +89,7 @@ class CorsoDiStudiController extends Controller
      * @param  UpdatePesiCds $request
      * @return void
      */
-    public function updatePesi(CorsoDiStudi $cds, UpdatePesiCds $request): void 
+    public function updatePesi(CorsoDiStudi $cds, UpdatePesi $request): void 
     {
         $cds->pesi_domande = $request->pesi; 
         $cds->save(); 

@@ -22,6 +22,15 @@ class CorsoDiStudi extends Model
     ]; 
 
     /**
+     * Campi aggiornabili
+     * 
+     * @var Array
+     */
+    protected static $updateable = [
+        'scostamento_numerosita', 'scostamento_media', 'pesi_domande'    
+    ]; 
+
+    /**
      * Tabella referenziata dal modello
      * 
      * @var string
@@ -34,6 +43,16 @@ class CorsoDiStudi extends Model
      * @var bool
      */
     public $timestamps = false; 
+    
+    /**
+     * Ritorna i campi aggiornabili
+     *
+     * @return array
+     */
+    public static function getUpdateableFields(): array 
+    {
+        return self::$updateable; 
+    }
 
     /**
      * Ritorna il dipartimento a cui il cds è associato

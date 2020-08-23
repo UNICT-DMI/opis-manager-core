@@ -146,7 +146,7 @@ class DomandaControllerTest extends TestCase
         $user = factory(User::class)->create();
 
         $response = $this->actingAs($user)
-            ->json('PUT', '/api/v2/domande', ['pesi' => $this->validSampleJson]); 
+            ->json('PUT', '/api/v2/domande', ['pesi_domande' => $this->validSampleJson]); 
             
         $response->assertOk(); 
     }

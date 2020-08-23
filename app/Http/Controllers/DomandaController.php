@@ -43,6 +43,6 @@ class DomandaController extends Controller
      */
     public function updateAll(UpdatePesi $request): void  
     {
-        Domanda::updateAllUsingJson($request->pesi); 
+        Domanda::updateAllUsingJson($request->pesi_domande); 
     }
 }

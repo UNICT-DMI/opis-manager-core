@@ -2,11 +2,10 @@
 
 namespace App\Http\Requests;
 
-use App\Rules\PesiBilanciati;
-use App\Rules\MatchPesiSchema;
+use App\Http\Requests\UpdatePesi;
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdatePesi extends FormRequest
+class UpdateCorsoDiStudi extends UpdatePesi
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,12 +24,11 @@ class UpdatePesi extends FormRequest
      */
     public function rules()
     {
-        return [
-            'pesi_domande' => [
-                'bail', 'required', 'json', 
-                new MatchPesiSchema, 
-                new PesiBilanciati
-            ]
-        ];
+        $scostamenti = [
+            'scostamento_numerosita' => 'numeric|min:0', 
+            'scostamento_media' => 'numeric|min:0'
+        ]; 
+
+        return array_merge(parent::rules(), $scostamenti); 
     }
 }

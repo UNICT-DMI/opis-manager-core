@@ -6,6 +6,7 @@ use App\Models\CorsoDiStudi;
 use Illuminate\Http\Request;
 use App\Http\Requests\UpdatePesi;
 use App\Http\Requests\YearRequest;
+use App\Http\Requests\UpdateCorsoDiStudi;
 use App\Http\Resources\CoarseCorsoDiStudi;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -81,17 +82,18 @@ class CorsoDiStudiController extends Controller
     {
         return response()->json($cds->insegnamenti); 
     }
-    
+        
     /**
-     * updatePesi
+     * Aggiorna i valori (aggiornabili) del corso di studi. 
      *
-     * @param  CorsoDiStudi $cds
-     * @param  UpdatePesiCds $request
+     * @param  UpdateCorsoDiStudi $request
      * @return void
      */
-    public function updatePesi(CorsoDiStudi $cds, UpdatePesi $request): void 
+    public function update (CorsoDiStudi $cds, UpdateCorsoDiStudi $request): void 
     {
-        $cds->pesi_domande = $request->pesi; 
-        $cds->save(); 
+        $updatedFields = $request->only(CorsoDiStudi::getUpdateableFields()); 
+
+        $cds->update($updatedFields); 
     }
+    
 }

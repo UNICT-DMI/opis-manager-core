@@ -161,7 +161,7 @@ class CorsoDiStudiControllerTest extends TestCase
     }
 
     /** @test */
-    public function can_edit_pesi_domande_into_cds_with_valid_json(): void 
+    public function can_update_corso_di_studi_if_logged_in(): void 
     {
         $this->seed(\DipartimentoTableSeeder::class);
         $this->seed(\CorsoDiStudiTableSeeder::class);
@@ -169,13 +169,28 @@ class CorsoDiStudiControllerTest extends TestCase
         $cds = CorsoDiStudi::first(); 
         $user = factory(User::class)->create();
 
-        $response = $this->actingAs($user)->json(
-            'PUT', 
-            '/api/v2/cds/with-id/' . $cds->id . "/pesi",
-            ['pesi' => $this->validSampleJson]    
-        ); 
+        $updates = [
+            'pesi_domande' => $this->validSampleJson, 
+            'scostamento_media' => 50, 
+            'scostamento_numerosità' => 50
+        ]; 
+
+        $response = $this->actingAs($user)
+            ->put('/api/v2/cds/with-id/' . $cds->id, $updates); 
 
         $response->assertOk();
+    }
+
+    /** @test */
+    public function cannot_update_pesi_domande_without_being_logged_in(): void 
+    {
+        $this->seed(\DipartimentoTableSeeder::class);
+        $this->seed(\CorsoDiStudiTableSeeder::class);
+        $cds = CorsoDiStudi::first(); 
+
+        $updates = ['pesi_domande' => $this->validSampleJson];  
+        $response = $this->json('put', '/api/v2/cds/with-id/' . $cds->id, $updates); 
+        $response->assertUnauthorized();
     }
 
     /**
@@ -192,12 +207,10 @@ class CorsoDiStudiControllerTest extends TestCase
 
         $cds = CorsoDiStudi::first(); 
         $user = factory(User::class)->create();
+        $updates = ['pesi_domande' => $this->sumGreaterThanOneSampleJson];  
 
-        $response = $this->actingAs($user)->json(
-            'PUT', 
-            '/api/v2/cds/with-id/' . $cds->id . "/pesi",
-            ['pesi' => $this->sumGreaterThanOneSampleJson]    
-        ); 
+        $response = $this->actingAs($user)
+            ->json('put', '/api/v2/cds/with-id/' . $cds->id, $updates); 
 
         $response->assertStatus(422);
     }
@@ -216,47 +229,12 @@ class CorsoDiStudiControllerTest extends TestCase
 
         $cds = CorsoDiStudi::first(); 
         $user = factory(User::class)->create();
+        $updates = ['pesi_domande' => $this->invalidJsonSchemaSampleJson];  
 
-        $response = $this->actingAs($user)->json(
-            'PUT', 
-            '/api/v2/cds/with-id/' . $cds->id . "/pesi",
-            ['pesi' => $this->invalidJsonSchemaSampleJson]    
-        ); 
+        $response = $this->actingAs($user)
+            ->json('put', '/api/v2/cds/with-id/' . $cds->id, $updates); 
 
         $response->assertStatus(422);
-    }
-
-    /** @test */
-    public function can_update_pesi_domande_if_logged_in(): void 
-    {
-        $this->seed(\DipartimentoTableSeeder::class);
-        $this->seed(\CorsoDiStudiTableSeeder::class);
-        $user   = factory(User::class)->create();
-        $token  = auth()->login($user); 
-        $cds    = CorsoDiStudi::first(); 
-        $route  = '/api/v2/cds/with-id/' . $cds->id . '/pesi'; 
-
-        $response = $this->withHeaders(['Authorization' => 'Bearer ' . $token])
-            ->json('PUT', $route, ['pesi' => $this->validSampleJson]); 
-
-        $response->assertOk();
-    }
-
-    /** @test */
-    public function cannot_update_pesi_domande_without_being_logged_in(): void 
-    {
-        $this->seed(\DipartimentoTableSeeder::class);
-        $this->seed(\CorsoDiStudiTableSeeder::class);
-        $user = factory(User::class)->create();
-        $cds = CorsoDiStudi::first(); 
-
-        $response = $this->json(
-            'PUT', 
-            '/api/v2/cds/with-id/' . $cds->id . "/pesi",
-            ['pesi' => $this->validSampleJson]    
-        ); 
-
-        $response->assertUnauthorized();
     }
 
     /** @test */

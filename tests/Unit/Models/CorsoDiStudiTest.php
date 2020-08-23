@@ -88,4 +88,14 @@ class CorsoDiStudiTest extends TestCase
         Insegnamento::first()->id_cds = CorsoDiStudi::first()->id; 
         $this->assertTrue(CorsoDiStudi::first()->insegnamenti[0] instanceof Insegnamento); 
     }
+
+    /** @test  */
+    public function can_get_cds_updateable_fields(): void 
+    {
+        $updateable = ['scostamento_numerosita', 'scostamento_media', 'pesi_domande']; 
+
+        $intersection = array_diff(CorsoDiStudi::getUpdateableFields(), $updateable); 
+
+        $this->assertTrue(sizeof($intersection) == 0);
+    }
 }

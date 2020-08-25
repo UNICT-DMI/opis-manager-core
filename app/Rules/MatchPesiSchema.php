@@ -23,7 +23,7 @@ class MatchPesiSchema implements Rule
             "properties": {
                 "id": { "type": "number" },
                 "peso": { "type": "number" },
-                "gruppo": { "type": "string" }
+                "gruppo": { "type": ["string", "null"] }
             }, 
             "additionalProperties": false, 
             "required": ["id", "peso", "gruppo"]

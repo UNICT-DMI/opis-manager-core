@@ -1,7 +1,10 @@
 <?php
 
+namespace Database\Seeders; 
+
 use App\Models\CorsoDiStudi;
 use Illuminate\Database\Seeder;
+
 
 class CorsoDiStudiTableSeeder extends Seeder
 {

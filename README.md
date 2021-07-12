@@ -1,37 +1,24 @@
-![image-20200620081023749](./docs/images/opis-manager-logo.png)
+<h1 align="center">OPIS manager core 🫀</h1>
+<p>
+</p>
 
+<p align="center">
+    Backend service for opis-manager project. Take a look at our <a href="https://explore.postman.com/templates/9736/opis-manager-core"> postman documentation 
+</p>
 
+<p align="center">
+    <img src="https://github.com/UNICT-DMI/opis-manager-core/workflows/project%20build/badge.svg" />    
+</p>
 
-
-
-## Opis-manager-core 📊 
-
-![CICD](https://github.com/UNICT-DMI/opis-manager-core/workflows/project%20build/badge.svg) 
-
-
-
-Backend service for opis-manager project. Take a look at our [postman API documentation](https://explore.postman.com/templates/9736/opis-manager-core)!
-
-### Getting started
+## Getting started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 
-#### Prerequisites
+### Prerequisites
 
-You will need: 
+Install PHP 7.3+, composer and some php extensions: php-xml, php-mbstring, php-mysql, php-sqlite3.
 
-* PHP 7.3+
-* Composer
-* php-xml
-* php-mbstring
-* php-mysql
-
-In a debian-based you could install PHP 7.4 following [this guide](https://computingforgeeks.com/how-to-install-php-on-ubuntu/) and the related php extensions using:
-```bash
-sudo apt install php-xml php-mbstring php-mysql
-```
-
-#### Installing 
+### Installation 
 
 Clone the repository
 
@@ -93,7 +80,7 @@ $ php artisan serve
 
 
 
-### Running the tests
+## Running the tests
 
 This project uses phpunit with several Laravel testing features. In order to run tests, you must run: 
 
@@ -109,7 +96,7 @@ $ vendor/bin/phpunit
 
 
 
-### Deployment 
+## Deployment 
 
 The recommended deployement setup is NGINX + php-fpm. Set up the project and link a virtual host to public/index.php. 
 
@@ -120,7 +107,26 @@ $ php artisan config:cache
 $ php artisan route:cache
 ```
 
+## Laravel Sail
 
+Run the following commands to deploy the project on docker.
+
+```sh
+php artisan sail:install
+php artisan sail:publish
+```
+
+Then get the containers up
+
+```sh
+./vendor/bin/sail up -d
+```
+
+And migrate the database tables 
+
+```sh
+./vendor/bin/sail artisan migrate --seed
+```
 
 ### Built with
 

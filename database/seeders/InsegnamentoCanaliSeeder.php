@@ -1,5 +1,7 @@
 <?php
 
+namespace Database\Seeders;
+
 use App\Models\CorsoDiStudi;
 use App\Models\Insegnamento;
 use Illuminate\Database\Seeder;

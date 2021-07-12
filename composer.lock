@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a8d903be033137c0308cb25aaaa0d72f",
+    "content-hash": "38e71825dc61f539247dc4dcc6c31cb0",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -5515,6 +5515,62 @@
                 "test"
             ],
             "time": "2020-07-09T08:09:16+00:00"
+        },
+        {
+            "name": "laravel/sail",
+            "version": "v1.8.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laravel/sail.git",
+                "reference": "164ab771c8ccef341a07a21fae2ee3b770ec2e9a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laravel/sail/zipball/164ab771c8ccef341a07a21fae2ee3b770ec2e9a",
+                "reference": "164ab771c8ccef341a07a21fae2ee3b770ec2e9a",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/console": "^8.0|^9.0",
+                "illuminate/contracts": "^8.0|^9.0",
+                "illuminate/support": "^8.0|^9.0",
+                "php": "^7.3|^8.0"
+            },
+            "bin": [
+                "bin/sail"
+            ],
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.x-dev"
+                },
+                "laravel": {
+                    "providers": [
+                        "Laravel\\Sail\\SailServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Laravel\\Sail\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Taylor Otwell",
+                    "email": "taylor@laravel.com"
+                }
+            ],
+            "description": "Docker files for running a basic Laravel application.",
+            "keywords": [
+                "docker",
+                "laravel"
+            ],
+            "time": "2021-07-06T16:57:00+00:00"
         },
         {
             "name": "mockery/mockery",

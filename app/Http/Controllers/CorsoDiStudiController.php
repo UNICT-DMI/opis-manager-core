@@ -44,10 +44,10 @@ class CorsoDiStudiController extends Controller
      * tutti gli insegnamenti del CDS di tutti gli anni accademici
      * - issue #11
      * 
-     * @param  int $unictId
+     * @param  string $unictId
      * @return JsonResource
      */
-    public function searchSchedeOpisUsingUnictId (int $unictId): JsonResource 
+    public function searchSchedeOpisUsingUnictId (string $unictId): JsonResource 
     {
         $cdsCollection = CorsoDiStudi::where('unict_id', $unictId)->get(); 
 
@@ -59,11 +59,11 @@ class CorsoDiStudiController extends Controller
      * di studi identificato dall'unict-id e dall'anno 
      * accademico passato come parametro.      
      * 
-     * @param  int $unictId
+     * @param  string $unictId
      * @param  Request $request
      * @return Response
      */
-    public function insegnamenti(int $unictId, YearRequest $request): Response
+    public function insegnamenti(string $unictId, YearRequest $request): Response
     {
         $cds = CorsoDiStudi::opisFindOrFail($unictId, $request->anno_accademico); 
 

@@ -12,7 +12,7 @@ $factory->define(CorsoDiStudi::class, function (Faker $faker) {
     $maxDipartimentoProgressive = Dipartimento::max('id'); 
     
     return [
-        'unict_id'          => 1 + CorsoDiStudi::max('unict_id'), 
+        'unict_id'          => $faker->unique()->bothify('?##'), 
         'nome'              => 'Corso di ' . $faker->word, 
         'classe'            => $faker->bothify('?-##'), 
         'anno_accademico'   => '2017/2018', 

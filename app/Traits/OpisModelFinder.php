@@ -13,11 +13,11 @@ trait OpisModelFinder
      * http not-found che ritornerà una response con status code
      * 404 al client.  
      *
-     * @param  int $unictId
+     * @param  string $unictId
      * @param  string $annoAccademico
      * @return Model
      */
-    public static function opisFindOrFail(int $unictId, string $annoAccademico): Model
+    public static function opisFindOrFail(string $unictId, string $annoAccademico): Model
     {
         $model = self::where('unict_id', $unictId)
             ->where('anno_accademico', $annoAccademico)

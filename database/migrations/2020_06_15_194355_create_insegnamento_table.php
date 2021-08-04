@@ -49,12 +49,12 @@ class CreateInsegnamentoTable extends Migration
             /**
              * Semestre di appartenenza
              */
-            $table->string('semestre', 4);
+            $table->string('semestre', 60);
 
             /**
              * crediti assegnati alla materia
              */
-            $table->string('cfu', 4);
+            $table->string('cfu', 5);
 
             /**
              * docente assegnato alla materia
@@ -88,7 +88,7 @@ class CreateInsegnamentoTable extends Migration
             /**
              * ??
              */
-            $table->string('tipo', 4)
+            $table->string('tipo', 25)
                 ->nullable()
                 ->default(NULL);
 
@@ -102,7 +102,7 @@ class CreateInsegnamentoTable extends Migration
             /**
              * ??
              */
-            $table->string('assegn', 30)
+            $table->string('assegn', 100)
                 ->nullable()
                 ->default(NULL);
 

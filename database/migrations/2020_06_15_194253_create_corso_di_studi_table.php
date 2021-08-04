@@ -23,7 +23,7 @@ class CreateCorsoDiStudiTable extends Migration
             /**
              * Identificativo fornito dalla pagina unict QA
              */
-            $table->integer('unict_id', false);
+            $table->string('unict_id', false);
 
             /**
              * Nome del corso di studi

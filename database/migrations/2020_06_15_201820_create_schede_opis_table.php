@@ -57,7 +57,7 @@ class CreateSchedeOpisTable extends Migration
              * numero di studenti inattivi e frequentanti
              * che hanno compilato la scheda
              */
-            $table->integer('inatt', false); 
+            $table->integer('inatt', false)->nullable(); 
 
             /**
              * numero di studenti inattivi e frequentanti

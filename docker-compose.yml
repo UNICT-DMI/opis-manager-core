@@ -8,8 +8,8 @@ services:
         environment:
             - MYSQL_DATABASE=opis_manager
             - MYSQL_ROOT_PASSWORD=root
-            - MYSQL_USER=user
-            - MYSQL_PASSWORD=user
+            - MYSQL_USER=${DB_USERNAME}
+            - MYSQL_PASSWORD=${DB_PASSWORD}
         networks:
             - opis
     app:

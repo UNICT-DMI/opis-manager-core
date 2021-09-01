@@ -107,30 +107,19 @@ $ php artisan config:cache
 $ php artisan route:cache
 ```
 
-## Laravel Sail
+## Docker Compose
 
-Run the following commands to deploy the project on docker.
-
-```sh
-php artisan sail:install
-php artisan sail:publish
-```
-
-Then get the containers up
+Run the following commands to deploy the project on docker. This is going to deploy two services: 
+1. MySQL database
+2. OPIS-Manager API (using a custom Dockerfile)
 
 ```sh
-./vendor/bin/sail up -d
-```
-
-And migrate the database tables 
-
-```sh
-./vendor/bin/sail artisan migrate --seed
+docker-compose up
 ```
 
 ### Built with
 
-* Laravel 7 - the web framework used 
+* Laravel 8 - the web framework used 
 * Composer - Dependency management  
 
 

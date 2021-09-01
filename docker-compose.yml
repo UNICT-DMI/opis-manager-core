@@ -1,45 +1,28 @@
-# For more information: https://laravel.com/docs/sail
-version: '3'
+version: '3.7'
 services:
-    laravel.test:
+    db:
+        image: mysql:5.7
+        restart: always
+        ports:
+            - "3306:3306"
+        environment:
+            - MYSQL_DATABASE=opis_manager
+            - MYSQL_ROOT_PASSWORD=root
+            - MYSQL_USER=${DB_USERNAME}
+            - MYSQL_PASSWORD=${DB_PASSWORD}
+        networks:
+            - opis
+    app:
         build:
-            context: ./docker/8.0
+            context: .
             dockerfile: Dockerfile
-            args:
-                WWWGROUP: '${WWWGROUP}'
-        image: sail-8.0/app
+        image: 'laravelapp'
         ports:
-            - '${APP_PORT:-8686}:80'
-        environment:
-            WWWUSER: '${WWWUSER}'
-            LARAVEL_SAIL: 1
-        volumes:
-            - '.:/var/www/html'
+            - "8080:8080"
         networks:
-            - sail
-        depends_on:
-            - mariadb
-    mariadb:
-        image: 'mariadb:10'
-        ports:
-            - '${FORWARD_DB_PORT:-10010}:3306'
-        environment:
-            MYSQL_ROOT_PASSWORD: '${DB_PASSWORD}'
-            MYSQL_DATABASE: '${DB_DATABASE}'
-            MYSQL_USER: '${DB_USERNAME}'
-            MYSQL_PASSWORD: '${DB_PASSWORD}'
-            MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
-        volumes:
-            - 'sailmariadb:/var/lib/mysql'
-        networks:
-            - sail
-        healthcheck:
-          test: ["CMD", "mysqladmin", "ping", "-p${DB_PASSWORD}"]
-          retries: 3
-          timeout: 5s
+            - opis
+        command: bash -c "chown -R www-data:www-data /var/www/html/* && composer install && php artisan serve --host=0.0.0.0 --port=8080"
+
 networks:
-    sail:
-        driver: bridge
-volumes:
-    sailmariadb:
-        driver: local
+    opis:
+        external: true

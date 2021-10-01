@@ -7,7 +7,8 @@
 </p>
 
 <p align="center">
-    <img src="https://github.com/UNICT-DMI/opis-manager-core/workflows/project%20build/badge.svg" />    
+    <img src="https://github.com/UNICT-DMI/opis-manager-core/workflows/project%20build/badge.svg" />
+    <a href="https://www.codefactor.io/repository/github/unict-dmi/opis-manager-core"><img src="https://www.codefactor.io/repository/github/unict-dmi/opis-manager-core/badge" alt="CodeFactor" /></a>    
 </p>
 
 ## Getting started

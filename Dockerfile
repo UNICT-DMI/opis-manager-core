@@ -4,7 +4,7 @@ USER root
 
 WORKDIR /var/www/html
 
-RUN apt-get update && apt-get install -y \
+RUN apt update && apt install -y \
         libpng-dev \
         zlib1g-dev \
         libxml2-dev \

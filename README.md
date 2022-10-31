@@ -110,13 +110,15 @@ $ php artisan route:cache
 
 ## Docker Compose
 
+Configure the .env file using as `DB_HOST=db`, keep the variable`DB_PASSWORD=` empty.
+
 Run the following commands to deploy the project on docker. This is going to deploy two services: 
-1. MySQL database
-2. OPIS-Manager API (using a custom Dockerfile)
 
 ```sh
 docker-compose up
 ```
+
+You can check if the application is running on http://127.0.0.1:8080/ but keep in mind that you need to insert a database into the current mysql db container.
 
 ### Built with
 

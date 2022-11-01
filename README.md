@@ -112,7 +112,7 @@ $ php artisan route:cache
 
 Configure the .env file using as `DB_HOST=db`, keep the variable`DB_PASSWORD=` empty.
 
-Run the following commands to deploy the project on docker. This is going to deploy two services: 
+Run the following command to pull the image from the github docker hub and to run it locally: 
 
 ```sh
 docker-compose up

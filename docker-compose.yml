@@ -10,6 +10,8 @@ services:
       - default
   app:
     image: ghcr.io/unict-dmi/opis-manager-core:dev
+    volumes:
+      - ./.env:/var/www/html/.env
     ports:
       - "8080:8080"
     networks:

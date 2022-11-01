@@ -3,23 +3,18 @@ services:
   db:
     image: mysql:8.0
     restart: always
-    ports:
-      - "3306:3306"
     environment:
       - MYSQL_ALLOW_EMPTY_PASSWORD="yes"
       - MYSQL_DATABASE=opis
     networks:
-      - opis
+      - default
   app:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    image: "laravelapp"
+    image: ghcr.io/unict-dmi/opis-manager-core:dev
     ports:
       - "8080:8080"
     networks:
-      - opis
-    command: bash -c "chown -R www-data:www-data /var/www/html/* && composer install && php artisan key:generate && php artisan serve --host=0.0.0.0 --port=8080"
+      - default
+    command: bash -c "php artisan serve --host=0.0.0.0 --port=8080"
 
 networks:
   opis:

@@ -4,16 +4,24 @@ services:
     image: mysql:8.0
     restart: always
     environment:
-      - MYSQL_ALLOW_EMPTY_PASSWORD="yes"
-      - MYSQL_DATABASE=opis
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+      MYSQL_DATABASE: opis
     networks:
       - default
+
   app:
     image: ghcr.io/unict-dmi/opis-manager-core:dev
+    depends_on:
+      - db
     volumes:
       - ./.env:/var/www/html/.env
     ports:
       - "8080:8080"
     networks:
       - default
-    command: bash -c "php artisan key:generate && php artisan serve --host=0.0.0.0 --port=8080"
+    command: >
+      bash -c "php artisan key:generate --force &&
+               php artisan jwt:secret --force &&
+               php artisan migrate --force &&
+               php artisan config:clear &&
+               php artisan serve --host=0.0.0.0 --port=8080"

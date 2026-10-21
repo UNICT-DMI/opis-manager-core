@@ -1,4 +1,3 @@
-# keep >= 8.3.36: CVE-2026-109618 / CVE-2026-109619 (RCE)
 FROM php:8.3.36
 
 USER root
